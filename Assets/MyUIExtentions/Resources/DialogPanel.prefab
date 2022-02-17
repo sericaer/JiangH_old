@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 2821853691059114817}
   - component: {fileID: 2821853691059114846}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

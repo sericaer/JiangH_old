@@ -20,6 +20,8 @@ class Player : RxMonoBehaviour
         button.onClick.AddListener(() =>
         {
             var instance = (GameObject)Instantiate(prefabs, Global.dialogRoot);
+
+            instance.GetComponent<PersonDetail>().person = GSession.inst.player;
         });
     }
 

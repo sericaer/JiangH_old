@@ -9,7 +9,13 @@ namespace JiangH.Runtime
             public static GSession Build()
             {
                 GSession gSession = new GSession();
-                gSession.player = new Person($"{gSession.GetHashCode().ToString("X2")} {DateTime.Now.ToString()}");
+
+                for(int i=0; i<5; i++)
+                {
+                    gSession.persons.Add(new Person(i.ToString()));
+                }
+
+                gSession.player = gSession.persons[0];
 
                 return gSession;
             }

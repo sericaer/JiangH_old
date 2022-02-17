@@ -5,10 +5,15 @@ using System.Text;
 
 namespace JiangH.Runtime
 {
-    class Estate : IEstate
+    public class Estate : IEstate
     {
         public string name { get; set; }
 
         public IPerson owner { get; }
+
+        public Estate(string name)
+        {
+            this.name = name;
+        }
     }
 }

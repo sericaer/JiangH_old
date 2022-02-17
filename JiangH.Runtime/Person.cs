@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace JiangH.Runtime
 {
-    internal class Person : IPerson
+    public class Person : IPerson
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,7 +22,11 @@ namespace JiangH.Runtime
             _estates = new ObservableCollection<IEstate>();
 
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
+        }
 
+        public void AddEstate(IEstate estate)
+        {
+            _estates.Add(estate);
         }
     }
 }
