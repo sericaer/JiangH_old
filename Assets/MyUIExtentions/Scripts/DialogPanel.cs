@@ -8,90 +8,41 @@ using UnityEngine.UI;
 [AddComponentMenu("UI/MyUIExtentions/DialogPanel")]
 public class DialogPanel : MonoBehaviour
 {
-    internal static GameObject CreateGameObject()
+    internal static GameObject CreateGameObject(GameObject parent)
     {
-        
-        GameObject instance = (GameObject)Instantiate(Resources.Load("DialogPanel"));
+        GameObject instance = (GameObject)Instantiate(Resources.Load("DialogPanel"), parent.transform);
         return instance;
     }
 
     public Button closeButton;
 
-    
+
     [HideInInspector]
     public bool isMode 
-    {
+    {   
         get
         {
-            return backgroundObject != null;
+            return _isMode;
         }
         set
         {
-            if(value == isMode)
-            {
-                return;
-            }
+            _isMode = value;
 
-            if(value)
-            {
-                backgroundObject = CreatePanel();
-                backgroundObject.name = "Background";
-
-                backgroundObject.transform.SetParent(this.transform.parent);
-                var backgroundRectTransform = backgroundObject.GetComponent<RectTransform>();
-
-                backgroundRectTransform.anchorMin = Vector2.zero;
-                backgroundRectTransform.anchorMax = Vector2.one;
-                backgroundRectTransform.sizeDelta = Vector2.zero;
-                backgroundRectTransform.anchoredPosition = Vector2.zero;
-
-                this.transform.SetParent(backgroundObject.transform);
-            }
-            else
-            {
-                this.transform.SetParent(backgroundObject.transform.parent);
-                backgroundObject.transform.SetParent(null);
-
-#if UNITY_EDITOR
-                DestroyImmediate(backgroundObject);
-#else
-                Destroy(backgroundObject);
-#endif
-            }
-
-            Debug.Log(isMode);
+            var image = GetComponent<Image>();
+            image.enabled = isMode;
         }
-    }
-
-    private GameObject CreatePanel()
-    {
-        GameObject panel = new GameObject("Panel");
-        Image i = panel.AddComponent<Image>();
-
-        var color = i.color;
-        color.a = 0.25f;
-        i.color = color;
-
-        return panel;
     }
 
     [HideInInspector]
     [SerializeField]
-    private GameObject backgroundObject;
+    private bool _isMode;
 
     // Start is called before the first frame update
     void Start()
     {
         closeButton.onClick.AddListener(() =>
         {
-            if(backgroundObject != null)
-            {
-                Destroy(backgroundObject);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            Destroy(this.gameObject);
         });
     }
 

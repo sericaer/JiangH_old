@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class DialogPanelEditor : Editor
         if(EditorGUI.EndChangeCheck())
         {
             dialog.isMode = isMode;
+            EditorUtility.SetDirty(dialog);
         }
     }
 }
+#endif
