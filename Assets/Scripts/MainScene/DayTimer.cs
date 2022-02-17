@@ -7,7 +7,7 @@ public class DayTimer : MonoBehaviour
     public int speed { get; set; }
     public bool isSysPause { get; set; }
 
-    private bool isUserPause => speed == -1;
+    public bool isUserPause { get; set; }
 
     public bool isPause => isSysPause || isUserPause;
 
@@ -15,7 +15,7 @@ public class DayTimer : MonoBehaviour
 
     public void OnSpeedChanged(int value)
     {
-        speed = value;
+        speed += value;
     }
 
     void Start()
