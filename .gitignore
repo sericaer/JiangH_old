@@ -76,3 +76,12 @@ crashlytics-build.properties
 
 !*-blend.csproj
 !*-blend.sln
+
+/JiangH.API/bin
+/JiangH.API/obj
+/JiangH.ModMgr/bin
+/JiangH.ModMgr/obj
+/JiangH.RelationMgr/bin
+/JiangH.RelationMgr/obj
+/JiangH.Runtime/bin
+/JiangH.Runtime/obj
