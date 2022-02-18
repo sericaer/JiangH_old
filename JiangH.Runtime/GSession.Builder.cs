@@ -16,6 +16,7 @@ namespace JiangH.Runtime
                 }
 
                 gSession.player = gSession.persons[0];
+                gSession.date = new Date();
 
                 return gSession;
             }

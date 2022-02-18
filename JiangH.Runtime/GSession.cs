@@ -13,12 +13,18 @@ namespace JiangH.Runtime
 
         public IPerson player { get; set; }
 
+
+        public IDate date { get; set; }
+
         public List<IPerson> persons = new List<IPerson>();
 
         public void OnDayInc()
         {
+            date.day++;
+
             player = persons[0];
 
+  
             persons.RemoveAt(0);
             persons.Add(player);
         }
