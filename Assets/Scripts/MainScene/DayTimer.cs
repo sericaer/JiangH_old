@@ -1,22 +1,24 @@
 ﻿using JiangH.Runtime;
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayTimer : MonoBehaviour
 {
+    public Button speedInc;
+    public Button speedDec;
+    public Toggle speedPause;
+
     public int speed { get; set; }
     public bool isSysPause { get; set; }
 
-    public bool isUserPause { get; set; }
+    public bool isUserPause => speedPause.isOn;
 
     public bool isPause => isSysPause || isUserPause;
 
-    private static int count;
-
-    public void OnSpeedChanged(int value)
-    {
-        speed += value;
-    }
+    public int MAX_SPEED => 4;
+    public int MIN_SPEED => 1;
 
     void Start()
     {
@@ -24,15 +26,36 @@ public class DayTimer : MonoBehaviour
 
         speed = 1;
 
+        speedInc.onClick.AddListener(() =>
+        {
+            speed++;
+            UpdateSpeedControl();
+        });
+
+        speedDec.onClick.AddListener(() =>
+        {
+            speed--;
+            UpdateSpeedControl();
+        });
+
+        speedPause.onValueChanged.AddListener((value) =>
+        {
+            UpdateSpeedControl();
+        });
+
         StartCoroutine(OnTimer());
+    }
+
+    private void UpdateSpeedControl()
+    {
+        speedInc.interactable = !speedPause.isOn && speed < MAX_SPEED;
+        speedDec.interactable = !speedPause.isOn && speed > MIN_SPEED;
     }
 
     private IEnumerator OnTimer()
     {
         yield return new WaitForSeconds(1.0f / speed);
         yield return new WaitUntil(() => !isPause);
-
-        count++;
         
         GSession.inst.OnDayInc();
 
