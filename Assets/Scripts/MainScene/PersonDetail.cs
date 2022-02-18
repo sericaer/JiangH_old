@@ -14,16 +14,32 @@ class PersonDetail : RxMonoBehaviour
 
     public Button btn;
 
+    public PersonDetailCommandPanel commandPanel;
+
     public ListViewString estates;
+
+    void Awake()
+    {
+        commandPanel.person = person;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        
         btn.onClick.AddListener(() =>
         {
             var estate = new Estate(DateTime.Now.Second.ToString());
             person.AddEstate(estate);
         });
+
+    }
+
+    internal void SetPerson(IPerson person)
+    {
+        this.person = person;
+
+        commandPanel.SetPerson(person);
 
         Action<IEstate> onAddEstate = (item) =>
         {
@@ -32,10 +48,23 @@ class PersonDetail : RxMonoBehaviour
 
         Action<IEstate> onRemoveEstate = (item) =>
         {
-            estates.DataSource.Remove(item.name);
+            //estates.DataSource.Remove(item.name);
         };
 
+        Action<IPersonCommand> onAddCommand = (item) =>
+        {
+            //commands.Add()
+        };
+
+        Action<IPersonCommand> onRemoveCommand = (item) =>
+        {
+            //estates.DataSource.Remove(item.name);
+        };
+
+
         dataBind.BindObservableCollection<IEstate>(person.estates, onAddEstate, onRemoveEstate);
+
+        //dataBind.BindObservableCollection<IPersonCommand>(person.commands, onAddCommand, onRemoveCommand);
     }
 
     // Update is called once per frame

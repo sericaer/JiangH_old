@@ -17,6 +17,7 @@ namespace JiangH.Runtime
         public IDate date { get; set; }
 
         public List<IPerson> persons = new List<IPerson>();
+        public List<IEstate> estates = new List<IEstate>();
 
         public void OnDayInc()
         {

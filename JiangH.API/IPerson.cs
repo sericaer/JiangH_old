@@ -11,6 +11,7 @@ namespace JiangH.API
         int money { get; set; }
 
         ReadOnlyObservableCollection<IEstate> estates { get;}
+        ReadOnlyObservableCollection<IPersonCommand> commands { get; }
 
         void AddEstate(IEstate estate);
     }

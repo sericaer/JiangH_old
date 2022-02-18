@@ -1,6 +1,7 @@
 ﻿using ReactiveMarbles.PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq.Expressions;
@@ -50,6 +51,16 @@ class DataBind
         comDisposable.Add(dispose);
 
         Debug.Log($"BindText {dispose.GetHashCode().ToString("X2")} {fromProperty.ToString()}");
+    }
+
+    public void BindObservableCollection<TCollectionItem>(ReadOnlyObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
+    {
+        foreach(var item in collection)
+        {
+            onAdd(item);
+        }
+
+        BindObservableCollection((INotifyCollectionChanged)collection, onAdd, onRemove);
     }
 
     public void BindObservableCollection<TCollectionItem>(INotifyCollectionChanged collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
