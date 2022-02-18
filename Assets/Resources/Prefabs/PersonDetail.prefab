@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 931975467}
   - component: {fileID: 931975466}
   m_Layer: 5
-  m_Name: ListViewString
+  m_Name: estates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3257,6 +3257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn: {fileID: 572856271}
+  estates: {fileID: 931975465}
 --- !u!1 &7851316035018218775
 GameObject:
   m_ObjectHideFlags: 0
