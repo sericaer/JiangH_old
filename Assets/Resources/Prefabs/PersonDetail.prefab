@@ -533,6 +533,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7257623250160575446}
+  - {fileID: 3750194645239162043}
   m_Father: {fileID: 204329627}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -592,6 +593,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commands: {fileID: 7257623250160575444}
+  commandDetailBackground: {fileID: 3750194645239162043}
+  prefabCommandDetail: {fileID: 5519429050600095110, guid: 98fbb3f51053a144297af3dacd936a03, type: 3}
 --- !u!114 &8630184928836952522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3752,7 +3755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 202, y: -108}
+  m_AnchoredPosition: {x: 71, y: -91}
   m_SizeDelta: {x: 270.7729, y: 213.9346}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7257623250160575450
@@ -3888,7 +3891,7 @@ MonoBehaviour:
         m_Calls: []
   disabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
   interactable: 0
-  virtualization: 1
+  virtualization: 0
   listType: 0
   destroyDefaultItemsCache: 1
   sort: 1
@@ -4045,7 +4048,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!114 &7257623250450640836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4121,6 +4124,7 @@ MonoBehaviour:
   GraphicsBackgroundVersion: 1
   GraphicsForegroundVersion: 1
   label: {fileID: 7257623250125689431}
+  toggle: {fileID: 7257623250450640843}
 --- !u!222 &7257623250450640837
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4781,6 +4785,81 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7851316035034061289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8165930461217027776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3750194645239162043}
+  - component: {fileID: 8972675247330063935}
+  - component: {fileID: 5519335346221810645}
+  m_Layer: 5
+  m_Name: PersonCommandDetailBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3750194645239162043
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165930461217027776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 351783067}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 200, y: 0}
+  m_SizeDelta: {x: -400, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8972675247330063935
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165930461217027776}
+  m_CullTransparentMesh: 1
+--- !u!114 &5519335346221810645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165930461217027776}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}

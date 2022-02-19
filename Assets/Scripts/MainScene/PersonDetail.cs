@@ -14,7 +14,7 @@ class PersonDetail : RxMonoBehaviour
 
     public Button btn;
 
-    public PersonDetailCommandPanel commandPanel;
+    public PersonCommandsTab commandPanel;
 
     public ListViewString estates;
 
