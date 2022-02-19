@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace Assets.MyUIExtentions
 {
+#if UNITY_EDITOR
     public static class MyUIExtention
     {
         #region UGUI source code 
@@ -19,4 +20,5 @@ namespace Assets.MyUIExtentions
             DialogPanel.CreateGameObject(menuCommand.context as GameObject);
         }
     }
+#endif
 }
