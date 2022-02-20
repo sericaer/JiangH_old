@@ -53,6 +53,16 @@ class DataBind
         Debug.Log($"BindText {dispose.GetHashCode().ToString("X2")} {fromProperty.ToString()}");
     }
 
+    public void BindObservableCollection<TCollectionItem>(ObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
+    {
+        foreach (var item in collection)
+        {
+            onAdd(item);
+        }
+
+        BindObservableCollection((INotifyCollectionChanged)collection, onAdd, onRemove);
+    }
+
     public void BindObservableCollection<TCollectionItem>(ReadOnlyObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
     {
         foreach(var item in collection)

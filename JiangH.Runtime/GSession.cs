@@ -1,6 +1,7 @@
 ﻿using JiangH.API;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace JiangH.Runtime
@@ -16,8 +17,16 @@ namespace JiangH.Runtime
 
         public IDate date { get; set; }
 
-        public List<IPerson> persons = new List<IPerson>();
-        public List<IEstate> estates = new List<IEstate>();
+        public readonly ObservableCollection<IPerson> persons;
+
+        public readonly ObservableCollection<IEstate> estates;
+
+
+        public GSession()
+        {
+            persons = new ObservableCollection<IPerson>();
+            estates = new ObservableCollection<IEstate>();
+        }
 
         public void OnDayInc()
         {
@@ -25,7 +34,6 @@ namespace JiangH.Runtime
 
             player = persons[0];
 
-  
             persons.RemoveAt(0);
             persons.Add(player);
         }
