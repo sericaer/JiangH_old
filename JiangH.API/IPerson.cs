@@ -14,5 +14,6 @@ namespace JiangH.API
         ReadOnlyObservableCollection<IPersonCommand> commands { get; }
 
         void AddEstate(IEstate estate);
+        void RemoveEstate(IEstate estate);
     }
 }

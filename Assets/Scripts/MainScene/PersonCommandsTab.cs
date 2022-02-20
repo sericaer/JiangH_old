@@ -51,11 +51,17 @@ class PersonCommandsTab : RxMonoBehaviour
         var instance = (GameObject)Instantiate(prefabCommandDetail, commandDetailBackground);
         var detailPanel = instance.GetComponent<PersonCommandDetailPanel>();
         detailPanel.command = command;
-        detailPanel.onCommandFinish = (cmd, flag) =>
+        
+        detailPanel.onPanelExit = (doFlag, cmd, targets) =>
         {
             var items = commands.GetComponentsInChildren<ListViewPersonCommandItem>();
             var selected = items.Single(x => x.command == cmd);
             selected.toggle.isOn = false;
+
+            if(doFlag)
+            {
+                cmd.Do(targets);
+            }
         };
     }
 }

@@ -620,7 +620,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!222 &2668497519874375883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -733,6 +733,7 @@ MonoBehaviour:
   GraphicsBackgroundVersion: 1
   GraphicsForegroundVersion: 0
   label: {fileID: 5743539956958597587}
+  toggle: {fileID: 5321256240795837443}
 --- !u!1 &1157965912037431959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1243,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4198541690884819367}
   m_OnClick:
     m_PersistentCalls:
@@ -1715,6 +1716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 45704351639164947}
+  tagertlistView: {fileID: 2884142211218082722}
   cancel: {fileID: 6483104630072215632}
   confirm: {fileID: 1548579121444046660}
 --- !u!1 &5805596202961094228

@@ -7,5 +7,7 @@ namespace JiangH.API
     public interface ICommandTarget
     {
         string key { get; set; }
+
+        object param { get; set; }
     }
 }

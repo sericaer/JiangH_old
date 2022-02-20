@@ -8,11 +8,21 @@ using UnityEngine.UI;
 public class ListViewCommandTargetItem : ListViewItem, IViewData<ICommandTarget>
 {
     public Text label;
-    public ICommandTarget command;
+    public Toggle toggle;
+
+    public ICommandTarget target;
 
     public void SetData(ICommandTarget item)
     {
-        command = item;
+        target = item;
         label.text = item.key;
+
+        toggle.onValueChanged.RemoveAllListeners();
+
+        toggle.onValueChanged.AddListener((isOn) =>
+        {
+            var list = Owner as ListViewCommandTagert;
+            list.OnSelectStateChanegd?.Invoke(target, isOn);
+        });
     }
 }

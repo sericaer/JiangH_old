@@ -18,6 +18,8 @@ public class ListViewPersonCommandItem : ListViewItem, IViewData<IPersonCommand>
         command = item;
 
         label.text = item.key;
+
+        toggle.onValueChanged.RemoveAllListeners();
         toggle.onValueChanged.AddListener((isOn) =>
         {
             if(isOn)
