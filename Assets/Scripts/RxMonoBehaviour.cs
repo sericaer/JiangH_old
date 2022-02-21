@@ -52,8 +52,24 @@ class DataBind
     public void BindText<TFrom, TProperty>(TFrom fromObject, Expression<Func<TFrom, TProperty>> fromProperty, Text text)
         where TFrom : class, INotifyPropertyChanged
     {
+        //var getter = fromProperty.Compile();
+        //text.text = getter(fromObject).ToString();
+
         var hostObs = fromObject.WhenChanged(fromProperty);
         var dispose = hostObs.Subscribe(x => text.text = x.ToString());
+        comDisposable.Add(dispose);
+
+        Debug.Log($"BindText {dispose.GetHashCode().ToString("X2")} {fromProperty.ToString()}");
+    }
+
+    public void BindAction<TFrom, TProperty>(TFrom fromObject, Expression<Func<TFrom, TProperty>> fromProperty, Action<TProperty> action)
+        where TFrom : class, INotifyPropertyChanged
+    {
+        //var getter = fromProperty.Compile();
+        //action(getter(fromObject));
+
+        var hostObs = fromObject.WhenChanged(fromProperty);
+        var dispose = hostObs.Subscribe(action);
         comDisposable.Add(dispose);
 
         Debug.Log($"BindText {dispose.GetHashCode().ToString("X2")} {fromProperty.ToString()}");

@@ -15,6 +15,8 @@ namespace JiangH.Runtime
         public int money { get; set; }
         public ReadOnlyObservableCollection<IEstate> estates { get; private set; }
 
+        public IEnergyMgr energyMgr { get; private set; }
+
         private ObservableCollection<IEstate> _estates;
 
         public Person(string name)
@@ -23,17 +25,22 @@ namespace JiangH.Runtime
 
             _estates = new ObservableCollection<IEstate>();
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
-            
+
+            energyMgr = new EnergyMgr();
         }
 
         public void AddEstate(IEstate estate)
         {
             _estates.Add(estate);
+
+            energyMgr.AddEstateOccupy(estate);
         }
 
         public void RemoveEstate(IEstate estate)
         {
             _estates.Remove(estate);
+
+            energyMgr.RemoveEstateOccupy(estate);
         }
 
         public IEnumerable<IPersonCommand> GetCommands()
@@ -57,6 +64,8 @@ namespace JiangH.Runtime
 
                 if (i == 0)
                 {
+                    def.key = "没收产业";
+
                     def.getTargets = (owner) =>
                     {
                         var person = owner as IPerson;
@@ -82,6 +91,8 @@ namespace JiangH.Runtime
 
                 if (i == 1)
                 {
+                    def.key = "授予产业";
+
                     def.getTargets = (owner) =>
                     {
                         return GSession.inst.player.estates.Select(x => new CommandTarget() { param = x, key = x.name });

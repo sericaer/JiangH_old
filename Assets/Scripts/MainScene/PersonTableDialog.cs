@@ -39,7 +39,7 @@ class PersonTableDialog : RxMonoBehaviour
     {
         public string name => person.name;
         public int estateCount => person.estates.Count;
-
+        
         public readonly IPerson person;
 
         public PersonView(IPerson person)

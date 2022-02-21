@@ -16,6 +16,8 @@ class PersonDetail : RxMonoBehaviour
 
     public PersonCommandsTab commandsTab;
 
+    public EnergyOccupyTab enerygOccupyTab;
+
     public ListViewString estates;
 
 
@@ -34,6 +36,8 @@ class PersonDetail : RxMonoBehaviour
         this.person = person;
 
         commandsTab.SetCommands(person.GetCommands());
+
+        enerygOccupyTab.SetEnergyMgr(person.energyMgr);
 
         Action<IEstate> onAddEstate = (item) =>
         {

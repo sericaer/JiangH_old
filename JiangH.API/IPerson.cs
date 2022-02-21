@@ -13,6 +13,8 @@ namespace JiangH.API
 
         ReadOnlyObservableCollection<IEstate> estates { get;}
 
+        IEnergyMgr energyMgr { get; }
+
         IEnumerable<IPersonCommand> GetCommands();
 
         void AddEstate(IEstate estate);
