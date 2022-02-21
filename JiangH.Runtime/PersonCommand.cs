@@ -69,5 +69,4 @@ namespace JiangH.Runtime
 
         public Action<object, IEnumerable<ICommandTarget>> Do { get; set; }
     }
-
 }

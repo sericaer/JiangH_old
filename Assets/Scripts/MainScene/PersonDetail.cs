@@ -14,32 +14,26 @@ class PersonDetail : RxMonoBehaviour
 
     public Button btn;
 
-    public PersonCommandsTab commandPanel;
+    public PersonCommandsTab commandsTab;
 
     public ListViewString estates;
 
-    void Awake()
-    {
-        commandPanel.person = person;
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
         btn.onClick.AddListener(() =>
         {
             var estate = new Estate(DateTime.Now.Second.ToString());
             person.AddEstate(estate);
         });
-
     }
 
     internal void SetPerson(IPerson person)
     {
         this.person = person;
 
-        commandPanel.SetPerson(person);
+        commandsTab.SetCommands(person.GetCommands());
 
         Action<IEstate> onAddEstate = (item) =>
         {

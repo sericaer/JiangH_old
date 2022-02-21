@@ -661,7 +661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 32
+  m_MinHeight: 30
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 400.5
+  m_PreferredWidth: 90
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -2515,9 +2515,9 @@ MonoBehaviour:
   columns:
   - infoType: 0
     fieldName: name
-    width: 0.5
-    autoWidth: 1
-    useRelativeWidth: 1
+    width: 90
+    autoWidth: 0
+    useRelativeWidth: 0
     cellPrefab: {fileID: 1285566994920282513, guid: 60aec448ad47b314da29d2ecbd2082df, type: 3}
     isSortable: 1
     expandableHeight: 0
@@ -2529,7 +2529,7 @@ MonoBehaviour:
     table: {fileID: 1736204291}
   - infoType: 0
     fieldName: estateCount
-    width: 0.5
+    width: 0.8876405
     autoWidth: 1
     useRelativeWidth: 1
     cellPrefab: {fileID: 114740427347427832, guid: 0c5bdf6b801f441da8f463d7b4780341, type: 3}
@@ -2563,9 +2563,9 @@ MonoBehaviour:
   titleFontSize: 14
   titleFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   titleFontStyle: 0
-  titleHeightMode: 0
-  titleHeight: 32
-  rowHeight: 32
+  titleHeightMode: 1
+  titleHeight: 30
+  rowHeight: 110
   spacing: -1
   outlineSprite: {fileID: 21300000, guid: 310ba3887979b42a4a83ff543427c7f6, type: 3}
   updateCellStyleAtRuntime: 0
@@ -3051,7 +3051,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 400.5
+  m_PreferredWidth: 711
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1

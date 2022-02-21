@@ -589,10 +589,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 351783066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b685811afd5d13d429f8b3d71c69ceed, type: 3}
+  m_Script: {fileID: 11500000, guid: cf7f976e17c00db48b9245b5869453bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commands: {fileID: 7257623250160575444}
+  commandListView: {fileID: 7257623250160575444}
   commandDetailBackground: {fileID: 3750194645239162043}
   prefabCommandDetail: {fileID: 5519429050600095110, guid: 98fbb3f51053a144297af3dacd936a03, type: 3}
 --- !u!114 &8630184928836952522
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7257623250160575447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aea862a0f33122489f1246a0db337c6, type: 3}
+  m_Script: {fileID: 11500000, guid: eb88b49d7ec63e140a9b0ac44058ffdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
@@ -3890,14 +3890,14 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   disabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-  interactable: 0
-  virtualization: 0
+  interactable: 1
+  virtualization: 1
   listType: 0
   destroyDefaultItemsCache: 1
   sort: 1
   disableScrollRect: 0
   LimitScrollValue: 0
-  allowColoring: 0
+  allowColoring: 1
   defaultBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   defaultColor: {r: 0, g: 0, b: 0, a: 1}
   highlightedBackgroundColor: {r: 203, g: 230, b: 244, a: 255}
@@ -3933,7 +3933,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  centerTheItems: 1
+  centerTheItems: 0
   loopedList: 0
   PrecalculateItemSizes: 1
   header: {fileID: 0}
@@ -4058,11 +4058,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7257623250450640832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f7bd9f5c0d02b4f85dd77aff44fa43, type: 3}
+  m_Script: {fileID: 11500000, guid: b89efecceb332a84282a255d81da0e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToggleOnClick: 0
-  ToggleOnSubmit: 0
+  ToggleOnClick: 1
+  ToggleOnSubmit: 1
   Index: -1
   onClick:
     m_PersistentCalls:
@@ -4114,15 +4114,14 @@ MonoBehaviour:
       m_Calls: []
   Owner: {fileID: 0}
   SelectableObjects: []
-  Foreground:
-  - {fileID: 0}
+  Foreground: []
   graphicsBackground:
-  - {fileID: 0}
+  - {fileID: 7257623250450640838}
   CellsBackgroundVersion: 0
   cellsGraphicsBackground: []
   LocalPositionZReset: 0
   GraphicsBackgroundVersion: 1
-  GraphicsForegroundVersion: 1
+  GraphicsForegroundVersion: 0
   label: {fileID: 7257623250125689431}
   toggle: {fileID: 7257623250450640843}
 --- !u!222 &7257623250450640837
@@ -4608,7 +4607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn: {fileID: 572856271}
-  commandPanel: {fileID: 7355121530674111666}
+  commandsTab: {fileID: 7355121530674111666}
   estates: {fileID: 931975465}
 --- !u!1 &7851316035018218775
 GameObject:

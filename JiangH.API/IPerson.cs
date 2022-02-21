@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -11,7 +12,8 @@ namespace JiangH.API
         int money { get; set; }
 
         ReadOnlyObservableCollection<IEstate> estates { get;}
-        ReadOnlyObservableCollection<IPersonCommand> commands { get; }
+
+        IEnumerable<IPersonCommand> GetCommands();
 
         void AddEstate(IEstate estate);
         void RemoveEstate(IEstate estate);

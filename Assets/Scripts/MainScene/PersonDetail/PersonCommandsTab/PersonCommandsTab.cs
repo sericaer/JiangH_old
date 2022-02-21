@@ -9,36 +9,23 @@ using UnityEngine;
 
 class PersonCommandsTab : RxMonoBehaviour
 {
-    public IPerson person;
+    public IEnumerable<IPersonCommand> commands;
 
-    public ListViewPersonCommand commands;
+    public ListViewPersonCommand commandListView;
 
     public Transform commandDetailBackground;
     public GameObject prefabCommandDetail;
 
-    internal void SetPerson(IPerson person)
+    internal void SetCommands(IEnumerable<IPersonCommand> commands)
     {
-        this.person = person;
+        this.commands = commands;
 
-        commands.OnSelectCommand = OnSelectCommand;
-
-        dataBind.BindObservableCollection<IPersonCommand>(person.commands, OnAddCommand, OnRemoveCommand);
-    }
-
-    private void OnAddCommand(IPersonCommand command)
-    {
-        commands.DataSource.Add(command);
-    }
-
-    private void OnRemoveCommand(IPersonCommand command)
-    {
-        commands.DataSource.Remove(command);
-
-        var detail = commandDetailBackground.GetComponentInChildren<PersonCommandDetailPanel>();
-        if (detail != null && detail.command != command)
+        foreach(var command in commands)
         {
-            Destroy(detail);
+            commandListView.Add(command);
         }
+
+        commandListView.OnSelectCommand = OnSelectCommand;
     }
 
     private void OnSelectCommand(IPersonCommand command)
@@ -54,7 +41,7 @@ class PersonCommandsTab : RxMonoBehaviour
         
         detailPanel.onPanelExit = (doFlag, cmd, targets) =>
         {
-            var items = commands.GetComponentsInChildren<ListViewPersonCommandItem>();
+            var items = commandListView.GetComponentsInChildren<ListViewPersonCommandItem>();
             var selected = items.Single(x => x.command == cmd);
             selected.toggle.isOn = false;
 

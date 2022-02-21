@@ -13,8 +13,14 @@ class RxMonoBehaviour : MonoBehaviour
 {
     protected DataBind dataBind = new DataBind();
 
+    protected Action onDestroy;
+
     void OnDestroy()
     {
+        onDestroy?.Invoke();
+
+        Debug.Log("OnDestroy RxMonoBehaviour " + this.GetHashCode().ToString("X2"));
+
         dataBind.Clear();
     }
 }

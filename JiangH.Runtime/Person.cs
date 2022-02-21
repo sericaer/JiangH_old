@@ -1,5 +1,6 @@
 ﻿using JiangH.API;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -14,10 +15,7 @@ namespace JiangH.Runtime
         public int money { get; set; }
         public ReadOnlyObservableCollection<IEstate> estates { get; private set; }
 
-        public ReadOnlyObservableCollection<IPersonCommand> commands { get; private set; }
-
         private ObservableCollection<IEstate> _estates;
-        private ObservableCollection<IPersonCommand> _comands;
 
         public Person(string name)
         {
@@ -25,12 +23,24 @@ namespace JiangH.Runtime
 
             _estates = new ObservableCollection<IEstate>();
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
+            
+        }
 
-            _comands = new ObservableCollection<IPersonCommand>();
-            commands = new ReadOnlyObservableCollection<IPersonCommand>(_comands);
+        public void AddEstate(IEstate estate)
+        {
+            _estates.Add(estate);
+        }
 
+        public void RemoveEstate(IEstate estate)
+        {
+            _estates.Remove(estate);
+        }
 
-            for (int i=0; i<5; i++)
+        public IEnumerable<IPersonCommand> GetCommands()
+        {
+            var list = new List<IPersonCommand>();
+
+            for (int i = 0; i < 5; i++)
             {
                 var def = new PersonCommandDef();
                 def.key = $"Command{i}";
@@ -45,7 +55,7 @@ namespace JiangH.Runtime
                     return true;
                 };
 
-                if (i==0)
+                if (i == 0)
                 {
                     def.getTargets = (owner) =>
                     {
@@ -57,7 +67,7 @@ namespace JiangH.Runtime
                     {
                         var person = owner as IPerson;
 
-                        foreach(var estate in targets.Select(x=>x.param as IEstate))
+                        foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
                             person.RemoveEstate(estate);
                             GSession.inst.player.AddEstate(estate);
@@ -94,18 +104,10 @@ namespace JiangH.Runtime
                     };
                 }
 
-                _comands.Add(new PersonCommand(this, def));
+                list.Add(new PersonCommand(this, def));
             }
-        }
 
-        public void AddEstate(IEstate estate)
-        {
-            _estates.Add(estate);
-        }
-
-        public void RemoveEstate(IEstate estate)
-        {
-            _estates.Remove(estate);
+            return list;
         }
     }
 }
