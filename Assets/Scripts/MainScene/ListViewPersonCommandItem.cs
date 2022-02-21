@@ -13,6 +13,8 @@ public class ListViewPersonCommandItem : ListViewItem, IViewData<IPersonCommand>
 
     public IPersonCommand command;
 
+    private DataBind dataBind;
+
     public void SetData(IPersonCommand item)
     {
         command = item;
@@ -29,5 +31,10 @@ public class ListViewPersonCommandItem : ListViewItem, IViewData<IPersonCommand>
             }
 
         });
+    }
+
+    public void Update()
+    {
+        this.gameObject.SetActive(command.isValid());
     }
 }

@@ -40,6 +40,11 @@ namespace JiangH.Runtime
 
                 };
 
+                def.isValid = (owner) =>
+                {
+                    return true;
+                };
+
                 if (i==0)
                 {
                     def.getTargets = (owner) =>
@@ -52,8 +57,40 @@ namespace JiangH.Runtime
                     {
                         var person = owner as IPerson;
 
-                        foreach(var estates in targets.Select(x=>x.param as IEstate))
-                        person.RemoveEstate(estates);
+                        foreach(var estate in targets.Select(x=>x.param as IEstate))
+                        {
+                            person.RemoveEstate(estate);
+                            GSession.inst.player.AddEstate(estate);
+                        }
+                    };
+
+                    def.isValid = (owner) =>
+                    {
+                        return owner != GSession.inst.player;
+                    };
+                }
+
+                if (i == 1)
+                {
+                    def.getTargets = (owner) =>
+                    {
+                        return GSession.inst.player.estates.Select(x => new CommandTarget() { param = x, key = x.name });
+                    };
+
+                    def.Do = (owner, targets) =>
+                    {
+                        var person = owner as IPerson;
+
+                        foreach (var estate in targets.Select(x => x.param as IEstate))
+                        {
+                            GSession.inst.player.RemoveEstate(estate);
+                            person.AddEstate(estate);
+                        }
+                    };
+
+                    def.isValid = (owner) =>
+                    {
+                        return owner != GSession.inst.player;
                     };
                 }
 

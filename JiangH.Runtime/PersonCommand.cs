@@ -13,6 +13,9 @@ namespace JiangH.Runtime
 
         public string key { get; set; }
 
+        public Func<bool> isValid { get; set; }
+
+
         public readonly IPerson owner;
 
         public IEnumerable<ICommandTarget> targets 
@@ -35,6 +38,8 @@ namespace JiangH.Runtime
             this.owner = owner;
             this.key = def.key;
             this.def = def;
+
+            this.isValid = ()=>def.isValid(owner);
         }
 
         public void Do(IEnumerable<ICommandTarget> targets)
@@ -47,6 +52,8 @@ namespace JiangH.Runtime
     {
         string key { get; }
 
+        Func<object, bool> isValid { get; }
+
         Func<object, IEnumerable<ICommandTarget>> getTargets { get; }
 
         Action<object, IEnumerable<ICommandTarget>> Do { get; }
@@ -54,6 +61,8 @@ namespace JiangH.Runtime
 
     public class PersonCommandDef : IPersonCommandDef
     {
+        public Func<object, bool> isValid { get; set; }
+
         public string key { get; set; }
 
         public Func<object, IEnumerable<ICommandTarget>> getTargets { get; set; }

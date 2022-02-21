@@ -10,6 +10,8 @@ namespace JiangH.API
     {
         string key { get; set; }
 
+        Func<bool> isValid { get; }
+
         IEnumerable<ICommandTarget> targets { get; }
 
         void Do(IEnumerable<ICommandTarget> targets);
