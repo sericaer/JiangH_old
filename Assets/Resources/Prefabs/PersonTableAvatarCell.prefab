@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 114071227873735328}
   - component: {fileID: 1285566994920282513}
   m_Layer: 5
-  m_Name: Button Text Cell
+  m_Name: PersonTableAvatarCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
