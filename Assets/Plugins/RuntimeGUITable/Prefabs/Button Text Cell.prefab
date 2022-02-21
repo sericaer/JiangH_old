@@ -131,9 +131,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437007705194634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3361ee1ac3d7a438d98bf829583433, type: 3}
+  m_Script: {fileID: 11500000, guid: ad787d79e1de2e2428c7ad02a3fe748a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expandableElement: {fileID: 0}
+  button: {fileID: 114071227873735328}
+  label: {fileID: 114999458891888692}
+  prefabPersonDetail: {fileID: 7851316034861703647, guid: e64de1ad0d73e2b469d26563e102bcbf, type: 3}
 --- !u!1 &1951700983018470
 GameObject:
   m_ObjectHideFlags: 0

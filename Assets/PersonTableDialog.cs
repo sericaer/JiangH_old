@@ -9,27 +9,42 @@ using UnityEngine;
 
 class PersonTableDialog : RxMonoBehaviour
 {
-    public List<IPerson> persons = new List<IPerson>();
+    public List<PersonView> persons = new List<PersonView>();
 
     // Start is called before the first frame update
     void Start()
     {
         dataBind.BindObservableCollection<IPerson>(GSession.inst.persons, OnAddPerson, OnRemovePerson);
+
+
     }
 
     private void OnRemovePerson(IPerson person)
     {
-        persons.Remove(person);
+        persons.RemoveAll(x => x.person == person);
     }
 
     private void OnAddPerson(IPerson person)
     {
-        persons.Add(person);
+        persons.Add(new PersonView(person));
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public class PersonView
+    {
+        public string name => person.name;
+        public int estateCount => person.estates.Count;
+
+        public readonly IPerson person;
+
+        public PersonView(IPerson person)
+        {
+            this.person = person;
+        }
     }
 }
