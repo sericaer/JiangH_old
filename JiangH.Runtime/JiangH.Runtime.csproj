@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JiangH.API\JiangH.API.csproj" />
+    <ProjectReference Include="..\JiangH.RelationMgr\JiangH.RelationMgr.csproj" />
   </ItemGroup>
 
 </Project>

@@ -27,7 +27,7 @@ class PersonDetail : RxMonoBehaviour
         btn.onClick.AddListener(() =>
         {
             var estate = new Estate(DateTime.Now.Second.ToString());
-            person.AddEstate(estate);
+            estate.owner = person;
         });
     }
 
@@ -60,7 +60,7 @@ class PersonDetail : RxMonoBehaviour
         };
 
 
-        dataBind.BindObservableCollection<IEstate>(person.estates, onAddEstate, onRemoveEstate);
+        dataBind.BindObservableCollection<IEstate>(person.estates, onAddEstate, onRemoveEstate, null);
 
         //dataBind.BindObservableCollection<IPersonCommand>(person.commands, onAddCommand, onRemoveCommand);
     }

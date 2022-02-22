@@ -29,22 +29,6 @@ namespace JiangH.Runtime
             energyMgr = new EnergyMgr();
         }
 
-        public void AddEstate(IEstate estate)
-        {
-            _estates.Add(estate);
-            estate.owner = this;
-
-            energyMgr.AddEstateOccupy(estate);
-        }
-
-        public void RemoveEstate(IEstate estate)
-        {
-            _estates.Remove(estate);
-            estate.owner = null;
-
-            energyMgr.RemoveEstateOccupy(estate);
-        }
-
         public IEnumerable<IPersonCommand> GetCommands()
         {
             var list = new List<IPersonCommand>();
@@ -80,8 +64,7 @@ namespace JiangH.Runtime
 
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
-                            person.RemoveEstate(estate);
-                            GSession.inst.player.AddEstate(estate);
+                            estate.owner = GSession.inst.player;
                         }
                     };
 
@@ -106,8 +89,7 @@ namespace JiangH.Runtime
 
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
-                            GSession.inst.player.RemoveEstate(estate);
-                            person.AddEstate(estate);
+                            estate.owner = person;
                         }
                     };
 
@@ -121,6 +103,59 @@ namespace JiangH.Runtime
             }
 
             return list;
+        }
+
+        public void OnRelationAdd(eRelation relationType, IPoint peer)
+        {
+            switch(relationType)
+            {
+                case eRelation.EstateOwner:
+                    {
+                        var estate = peer as IEstate;
+                        if (estate == null)
+                        {
+                            throw new Exception();
+                        }
+
+                        _estates.Add(peer as IEstate);
+                        energyMgr.AddEstateOccupy(estate);
+                    }
+                    break;
+                default:
+                    throw new Exception();
+            }
+        }
+
+        public void OnRelationChanged(eRelation relationType, IPoint prev, IPoint curr)
+        {
+            switch (relationType)
+            {
+                case eRelation.EstateOwner:
+                    throw new NotImplementedException();
+                default:
+                    throw new Exception();
+            }
+        }
+
+        public void OnRelationRemove(eRelation relationType, IPoint peer)
+        {
+            switch (relationType)
+            {
+                case eRelation.EstateOwner:
+                    {
+                        var estate = peer as IEstate;
+                        if (estate == null)
+                        {
+                            throw new Exception();
+                        }
+
+                        _estates.Remove(peer as IEstate);
+                        energyMgr.RemoveEstateOccupy(estate);
+                    }
+                    break;
+                default:
+                    throw new Exception();
+            }
         }
     }
 }

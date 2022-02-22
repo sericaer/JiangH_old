@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace JiangH.API
 {
-    public interface IPerson : INotifyPropertyChanged
+    public interface IPerson : INotifyPropertyChanged, IPoint
     {
         string name { get; set; }
 
@@ -16,8 +16,5 @@ namespace JiangH.API
         IEnergyMgr energyMgr { get; }
 
         IEnumerable<IPersonCommand> GetCommands();
-
-        void AddEstate(IEstate estate);
-        void RemoveEstate(IEstate estate);
     }
 }

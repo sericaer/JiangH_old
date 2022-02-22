@@ -14,7 +14,7 @@ class PersonTableDialog : RxMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dataBind.BindObservableCollection<IPerson>(GSession.inst.persons, OnAddPerson, OnRemovePerson);
+        dataBind.BindObservableCollection<IPerson>(GSession.inst.persons, OnAddPerson, OnRemovePerson, null);
 
 
     }

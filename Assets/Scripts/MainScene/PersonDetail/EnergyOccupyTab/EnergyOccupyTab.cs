@@ -18,7 +18,7 @@ class EnergyOccupyTab : RxMonoBehaviour
         this.energyMgr = energyMgr;
 
         dataBind.BindText(energyMgr, x => x.totalEstateOccupied, totalEstateOccupied);
-        dataBind.BindObservableCollection(energyMgr.estateOccupys, OnAddEstateOccupy, OnRemoveEstateOccupy);
+        dataBind.BindObservableCollection(energyMgr.estateOccupys, OnAddEstateOccupy, OnRemoveEstateOccupy, null);
     }
 
     private void OnRemoveEstateOccupy(IEnergyOccupy occupy)

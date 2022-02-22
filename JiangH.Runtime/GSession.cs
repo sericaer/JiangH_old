@@ -1,4 +1,5 @@
 ﻿using JiangH.API;
+using JiangH.RelationMgr;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,11 +21,13 @@ namespace JiangH.Runtime
 
         public readonly ObservableCollection<IEstate> estates;
 
+        public readonly IRelationManager relationMgr;
 
         public GSession()
         {
             persons = new ObservableCollection<IPerson>();
             estates = new ObservableCollection<IEstate>();
+            relationMgr = new RelationManager();
         }
 
         public void OnDayInc()

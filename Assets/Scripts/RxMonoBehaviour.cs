@@ -75,27 +75,27 @@ class DataBind
         Debug.Log($"BindText {dispose.GetHashCode().ToString("X2")} {fromProperty.ToString()}");
     }
 
-    public void BindObservableCollection<TCollectionItem>(ObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
+    public void BindObservableCollection<TCollectionItem>(ObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove, Action<TCollectionItem, TCollectionItem> onReplace)
     {
         foreach (var item in collection)
         {
             onAdd(item);
         }
 
-        BindObservableCollection((INotifyCollectionChanged)collection, onAdd, onRemove);
+        BindObservableCollection((INotifyCollectionChanged)collection, onAdd, onRemove, onReplace);
     }
 
-    public void BindObservableCollection<TCollectionItem>(ReadOnlyObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
+    public void BindObservableCollection<TCollectionItem>(ReadOnlyObservableCollection<TCollectionItem> collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove, Action<TCollectionItem, TCollectionItem> onReplace)
     {
         foreach(var item in collection)
         {
             onAdd(item);
         }
 
-        BindObservableCollection((INotifyCollectionChanged)collection, onAdd, onRemove);
+        BindObservableCollection((INotifyCollectionChanged)collection, onAdd, onRemove, onReplace);
     }
 
-    public void BindObservableCollection<TCollectionItem>(INotifyCollectionChanged collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove)
+    public void BindObservableCollection<TCollectionItem>(INotifyCollectionChanged collection, Action<TCollectionItem> onAdd, Action<TCollectionItem> onRemove, Action<TCollectionItem, TCollectionItem> onReplace)
     {
         NotifyCollectionChangedEventHandler onCollectionChanged = (sender, e) =>
         {
@@ -117,8 +117,13 @@ class DataBind
                         }
                     }
                     break;
-                default:
+                case NotifyCollectionChangedAction.Replace:
+                    {
+
+                    }
                     break;
+                default:
+                    throw new NotImplementedException();
             }
         };
 
