@@ -87,6 +87,11 @@ namespace JiangH.RelationMgr
 
         public void Add(eRelation relationType, IPoint point1, IPoint point2)
         {
+            if(all.Any(x => x.relationType == relationType && x.p1 == point1 && x.p2 == point2))
+            {
+                throw new Exception();
+            }
+
             var relation = new Relation(relationType, point1, point2);
             all.Add(relation);
         }
