@@ -33,6 +33,11 @@ namespace JiangH.Runtime
 
             player = persons[0];
 
+            foreach(var estate in estates)
+            {
+                estate.OnDayInc(date.year, date.month, date.day);
+            }
+
             //persons.RemoveAt(0);
             //persons.Add(player);
         }

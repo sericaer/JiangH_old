@@ -32,6 +32,7 @@ namespace JiangH.Runtime
         public void AddEstate(IEstate estate)
         {
             _estates.Add(estate);
+            estate.owner = this;
 
             energyMgr.AddEstateOccupy(estate);
         }
@@ -39,6 +40,7 @@ namespace JiangH.Runtime
         public void RemoveEstate(IEstate estate)
         {
             _estates.Remove(estate);
+            estate.owner = null;
 
             energyMgr.RemoveEstateOccupy(estate);
         }

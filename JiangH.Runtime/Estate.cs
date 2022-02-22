@@ -9,11 +9,21 @@ namespace JiangH.Runtime
     {
         public string name { get; set; }
 
-        public IPerson owner { get; }
+        public IPerson owner { get; set; }
+
+        public EnergyOccupyLevel level { get; set; }
 
         public Estate(string name)
         {
             this.name = name;
+        }
+
+        public void OnDayInc(int year, int month, int day)
+        {
+            if(day == 30)
+            {
+                owner.money += (int)level+1 * 100;
+            }
         }
     }
 }

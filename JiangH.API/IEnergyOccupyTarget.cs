@@ -7,5 +7,7 @@ namespace JiangH.API
     public interface IEnergyOccupyTarget
     {
         string name { get; set; }
+
+        EnergyOccupyLevel level { get; set; }
     }
 }
