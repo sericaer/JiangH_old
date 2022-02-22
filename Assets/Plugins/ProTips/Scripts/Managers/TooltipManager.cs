@@ -267,6 +267,7 @@ namespace ModelShark
 
             // Parent the tooltip container under the correct canvas.
             TooltipContainer.transform.SetParent(GuiCanvas.transform, false);
+            TooltipContainer.transform.SetAsLastSibling();
 
             tooltip.TooltipTrigger = trigger;
 
