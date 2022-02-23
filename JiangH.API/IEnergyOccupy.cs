@@ -15,10 +15,12 @@ namespace JiangH.API
     {
         string name { get; }
 
-        EnergyOccupyLevel occupyLevel { get; set; }
-
         int value { get; }
 
+        EnergyOccupyLevel occupyLevel { get; set; }
+
         IEnergyOccupyTarget target { get; }
+
+        string GetLevelDesc(EnergyOccupyLevel level);
     }
 }

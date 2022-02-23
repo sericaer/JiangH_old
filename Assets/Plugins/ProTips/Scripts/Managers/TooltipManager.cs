@@ -208,7 +208,7 @@ namespace ModelShark
                 Debug.LogWarning("TooltipTrigger \"" + trigger.name + "\" has no associated TooltipStyle. Cannot show tooltip.");
                 yield break;
             }
-
+            
             Tooltip tooltip = trigger.Tooltip;
             Image tooltipBkgImg = tooltip.BackgroundImage;
 

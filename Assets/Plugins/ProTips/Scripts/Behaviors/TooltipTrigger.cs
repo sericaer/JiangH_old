@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -45,6 +46,9 @@ namespace ModelShark
 
         [HideInInspector, Tooltip("While open, this tooltip will prevent any other tooltips from triggering. Something (like a script) will need to manually close it.")]
         public bool isBlocking;
+
+
+        public Action actionBeforPopup;
 
         // Timer variables - these keep track of how much time has elapsed.
         private float hoverTimer;
@@ -238,7 +242,9 @@ namespace ModelShark
             Tooltip.StaysOpen = staysOpen;
             Tooltip.NeverRotate = neverRotate;
             Tooltip.IsBlocking = isBlocking;
-            
+
+            actionBeforPopup?.Invoke();
+
             TooltipManager.Instance.SetTextAndSize(this);
 
             // Show and position the tooltip.
@@ -288,6 +294,9 @@ namespace ModelShark
             Tooltip.StaysOpen = staysOpen;
             Tooltip.NeverRotate = neverRotate;
             Tooltip.IsBlocking = isBlocking;
+
+            actionBeforPopup?.Invoke();
+
             TooltipManager.Instance.SetTextAndSize(this);
 
             // Show and position the tooltip.

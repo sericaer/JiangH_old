@@ -1,4 +1,5 @@
 using JiangH.API;
+using ModelShark;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ class ListViewEnergyOccupyItem : ListViewItem, IViewData<IEnergyOccupy>
                     energyOccupy.occupyLevel = level;
                 }
             });
+
+            var tooltipTrigger = toggle.GetComponent<LazyUpdateTooltipTrigger>();
+            tooltipTrigger.funcGenerateTextInfo = ()=> GetLevelTooltipInfo(toggle);
         }
 
         dataBind = new DataBind();
@@ -42,6 +46,13 @@ class ListViewEnergyOccupyItem : ListViewItem, IViewData<IEnergyOccupy>
         dataBind.BindText(energyOccupy, x=>x.value, value);
 
         dataBind.BindAction(energyOccupy, x => x.occupyLevel, OnLevelChanged);
+    }
+
+    private IEnumerable<(string paramName, string text)> GetLevelTooltipInfo(Toggle toggle)
+    {
+        var level = (EnergyOccupyLevel)Enum.Parse(typeof(EnergyOccupyLevel), toggle.name);
+
+        return new (string paramName, string text)[] { ("BodyText", energyOccupy.GetLevelDesc(level)) };
     }
 
     protected override void OnDestroy()

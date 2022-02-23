@@ -10,6 +10,9 @@ namespace JiangH.Runtime
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string name => target.name;
+
+        public int value => (int)(occupyLevel + 1) * 3;
+
         public EnergyOccupyLevel occupyLevel
         {
             get
@@ -23,8 +26,6 @@ namespace JiangH.Runtime
             }
         }
 
-        public int value => (int)(occupyLevel+1) * 3;
-
         public IEnergyOccupyTarget target { get; private set; }
 
         private EnergyOccupyLevel _occupyLevel;
@@ -33,8 +34,11 @@ namespace JiangH.Runtime
         {
             this.target = target;
             this.occupyLevel = EnergyOccupyLevel.VeryLow;
+        }
 
-
+        public string GetLevelDesc(EnergyOccupyLevel level)
+        {
+            return $"this is {level}";
         }
     }
 }
