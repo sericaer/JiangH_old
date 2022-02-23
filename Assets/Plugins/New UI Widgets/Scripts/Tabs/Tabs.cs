@@ -259,6 +259,9 @@
 		/// </summary>
 		public Func<Tab, bool> CanSelectTab = AllowSelect;
 
+
+		private string defaultSelectedTabName;
+
 		/// <summary>
 		/// Default function for the CanSelectTab.
 		/// </summary>
@@ -312,6 +315,11 @@
 			UpdateButtons();
 
 			Localization.OnLocaleChanged += UpdateButtonsData;
+
+			if(defaultSelectedTabName != null)
+            {
+				SelectTab(defaultSelectedTabName);
+            }
 		}
 
 		/// <summary>
@@ -568,6 +576,11 @@
 				}
 			}
 		}
+
+		public void SetDefaultSelectedTab(string name)
+        {
+			defaultSelectedTabName = name;
+        }
 
 #if UNITY_EDITOR
 		/// <summary>
