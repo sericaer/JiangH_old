@@ -16,7 +16,7 @@ namespace JiangH.Runtime
 
                 for (int i = 0; i < 15; i++)
                 {
-                    GSession.inst.estates.Add(new Estate((i + 'a').ToString()));
+                    GSession.inst.estates.Add(new Estate((i + 'a').ToString(), new MarketDef()));
                 }
 
                 for (int i=0; i<5; i++)

@@ -26,7 +26,7 @@ class PersonDetail : RxMonoBehaviour
     {
         btn.onClick.AddListener(() =>
         {
-            var estate = new Estate(DateTime.Now.Second.ToString());
+            var estate = new Estate(DateTime.Now.Second.ToString(), new MarketDef());
             estate.owner = person;
         });
     }

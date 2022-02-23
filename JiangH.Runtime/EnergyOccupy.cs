@@ -1,6 +1,7 @@
 ﻿using JiangH.API;
 using PropertyChanged;
 using System.ComponentModel;
+using System.Linq;
 
 namespace JiangH.Runtime
 {
@@ -38,7 +39,7 @@ namespace JiangH.Runtime
 
         public string GetLevelDesc(EnergyOccupyLevel level)
         {
-            return $"this is {level}";
+            return string.Join("\n", target.getLevelEffect(level).Select(x=>$"{x.pdtName} {x.value}"));
         }
     }
 }
