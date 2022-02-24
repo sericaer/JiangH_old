@@ -15,7 +15,7 @@ namespace JiangH.API
     {
         string name { get; }
 
-        int value { get; }
+        int energyValue { get; }
 
         EnergyOccupyLevel occupyLevel { get; set; }
 

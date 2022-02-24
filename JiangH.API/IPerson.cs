@@ -16,5 +16,6 @@ namespace JiangH.API
         IEnergyMgr energyMgr { get; }
 
         IEnumerable<IPersonCommand> GetCommands();
+        int GetEnergyOccupyValue(EnergyOccupyLevel occupyLevel, IEnergyOccupyTarget target);
     }
 }

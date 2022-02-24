@@ -19,11 +19,15 @@ namespace JiangH.Runtime
 
         public int totalEstateOccupied { get; private set; }
 
+        private readonly IPerson owner;
+
         private ObservableCollection<IEnergyOccupy> _estateOccupys = new ObservableCollection<IEnergyOccupy>();
         private Dictionary<IEnergyOccupy, IDisposable> _dictOccupyDispose = new Dictionary<IEnergyOccupy, IDisposable>();
 
-        public EnergyMgr()
+        public EnergyMgr(IPerson owner)
         {
+            this.owner = owner;
+
             energyValue = 100;
 
             totalEstateOccupied = 0;
@@ -33,12 +37,11 @@ namespace JiangH.Runtime
 
         public void AddEstateOccupy(IEstate estate)
         {
-            var energyOccupy = new EnergyOccupy(estate);
+            var energyOccupy = new EnergyOccupy(estate, owner);
             _estateOccupys.Add(energyOccupy);
 
-            //UpdateTotalEstateOccupied();
 
-            var dispose = energyOccupy.WhenChanged(x=>x.value).Subscribe(_ => UpdateTotalEstateOccupied());
+            var dispose = energyOccupy.WhenChanged(x=>x.energyValue).Subscribe(_ => UpdateTotalEstateOccupied());
 
             _dictOccupyDispose.Add(energyOccupy, dispose);
         }
@@ -55,7 +58,7 @@ namespace JiangH.Runtime
 
         private void UpdateTotalEstateOccupied()
         {
-            totalEstateOccupied = _estateOccupys.Sum(x => x.value);
+            totalEstateOccupied = _estateOccupys.Sum(x => x.energyValue);
         }
     }
 }

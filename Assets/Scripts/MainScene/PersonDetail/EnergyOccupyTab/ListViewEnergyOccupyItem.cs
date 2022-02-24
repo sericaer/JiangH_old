@@ -43,7 +43,7 @@ class ListViewEnergyOccupyItem : ListViewItem, IViewData<IEnergyOccupy>
         dataBind = new DataBind();
 
         dataBind.BindText(energyOccupy, x=>x.name, label);
-        dataBind.BindText(energyOccupy, x=>x.value, value);
+        dataBind.BindText(energyOccupy, x=>x.energyValue, value);
 
         dataBind.BindAction(energyOccupy, x => x.occupyLevel, OnLevelChanged);
     }

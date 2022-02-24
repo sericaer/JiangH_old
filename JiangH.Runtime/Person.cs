@@ -26,7 +26,7 @@ namespace JiangH.Runtime
             _estates = new ObservableCollection<IEstate>();
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
 
-            energyMgr = new EnergyMgr();
+            energyMgr = new EnergyMgr(this);
         }
 
         public IEnumerable<IPersonCommand> GetCommands()
@@ -103,6 +103,11 @@ namespace JiangH.Runtime
             }
 
             return list;
+        }
+
+        public int GetEnergyOccupyValue(EnergyOccupyLevel occupyLevel, IEnergyOccupyTarget target)
+        {
+            return ((int)occupyLevel + 1) * 3;
         }
     }
 }
