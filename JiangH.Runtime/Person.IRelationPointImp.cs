@@ -23,6 +23,11 @@ namespace JiangH.Runtime
                         energyMgr.AddEstateOccupy(estate);
                     }
                     break;
+                case eRelation.PersonBranch:
+                    {
+                        _branch = peer as IBranch;
+                    }
+                    break;
                 default:
                     throw new Exception();
             }
@@ -34,6 +39,11 @@ namespace JiangH.Runtime
             {
                 case eRelation.EstateOwner:
                     throw new NotImplementedException();
+                case eRelation.PersonBranch:
+                    {
+                        _branch = curr as IBranch;
+                    }
+                    break;
                 default:
                     throw new Exception();
             }

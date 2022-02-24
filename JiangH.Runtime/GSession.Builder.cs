@@ -10,29 +10,56 @@ namespace JiangH.Runtime
         {
             public static GSession Build()
             {
-                GSession.inst = new GSession();
+                var session = new GSession();
+                GSession.inst = session;
 
-                GSession.inst.date = new Date();
+                session.date = new Date();
 
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    GSession.inst.estates.Add(new Estate((i + 'a').ToString(), new MarketDef()));
-                }
+                    var sect = new Sect($"Sect{i}");
+                    session.sects.Add(sect);
 
-                for (int i=0; i<5; i++)
-                {
-                    var person = new Person(i.ToString());
-                    GSession.inst.persons.Add(person);
-
-                    for(int j=i*3; j<i*3+3; j++)
+                    for (var j = 0; j < 2; j++)
                     {
-                        GSession.inst.estates[j].owner = person;
-                        //person.AddEstate(gSession.estates[j]);
+                        var branch = new Branch($"{sect.name}.Branch{j}", sect);
+
+                        if (j == 0)
+                        {
+                            branch.SetMain();
+                        }
                     }
                 }
 
-                GSession.inst.player = GSession.inst.persons[0];
-                return GSession.inst;
+                for (int i = 0; i < 100; i++)
+                {
+                    session.estates.Add(new Estate($"EState{i}", new MarketDef()));
+                }
+
+                for (int i = 0; i < 100; i++)
+                {
+                    session.persons.Add(new Person($"Person{i}"));
+                }
+
+                for(int i=0; i< session.persons.Count() / 2; i++)
+                {
+                    var sect = session.sects[i % session.sects.Count()];
+                    var branch = sect.branches[i % sect.branches.Count()];
+                    session.persons[i].branch = branch;
+
+                    if(branch.owner == null)
+                    {
+                        branch.owner = session.persons[i];
+                    }
+                }
+
+                for (int i = 0; i < session.estates.Count() / 2; i++)
+                {
+                    session.estates[i].owner = session.persons[i % session.persons.Count() / 2];
+                }
+
+                session.player = GSession.inst.persons[0];
+                return session;
             }
         }
     }

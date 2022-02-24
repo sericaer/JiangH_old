@@ -12,12 +12,32 @@ namespace JiangH.Runtime
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string name { get; set; }
+
+        public IBranch branch
+        {
+            get
+            {
+                return _branch;
+            }
+            set
+            {
+                _branch = value;
+
+                var prevBranch = _branch;
+                _branch = value;
+
+                GSession.inst.relationMgr.Change(eRelation.PersonBranch, this, prevBranch, _branch);
+            }
+        }
+
         public int money { get; set; }
+
         public ReadOnlyObservableCollection<IEstate> estates { get; private set; }
 
         public IEnergyMgr energyMgr { get; private set; }
 
         private ObservableCollection<IEstate> _estates;
+        private IBranch _branch;
 
         public Person(string name)
         {

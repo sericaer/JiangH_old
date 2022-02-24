@@ -9,6 +9,8 @@ namespace JiangH.API
     {
         string name { get; set; }
 
+        IBranch branch { get; set; }
+        
         int money { get; set; }
 
         ReadOnlyObservableCollection<IEstate> estates { get;}
@@ -16,6 +18,7 @@ namespace JiangH.API
         IEnergyMgr energyMgr { get; }
 
         IEnumerable<IPersonCommand> GetCommands();
+
         int GetEnergyOccupyValue(EnergyOccupyLevel occupyLevel, IEnergyOccupyTarget target);
     }
 }

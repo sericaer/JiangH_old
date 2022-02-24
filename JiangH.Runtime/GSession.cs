@@ -17,17 +17,17 @@ namespace JiangH.Runtime
 
         public IDate date { get; set; }
 
-        public readonly ObservableCollection<IPerson> persons;
+        public readonly ObservableCollection<IPerson> persons = new ObservableCollection<IPerson>();
 
-        public readonly ObservableCollection<IEstate> estates;
+        public readonly ObservableCollection<IEstate> estates = new ObservableCollection<IEstate>();
 
-        public readonly IRelationManager relationMgr;
+        public readonly ObservableCollection<ISect> sects = new ObservableCollection<ISect>();
+
+        public readonly IRelationManager relationMgr = new RelationManager();
 
         public GSession()
         {
-            persons = new ObservableCollection<IPerson>();
-            estates = new ObservableCollection<IEstate>();
-            relationMgr = new RelationManager();
+
         }
 
         public void OnDayInc()
