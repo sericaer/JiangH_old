@@ -17,7 +17,7 @@ namespace JiangH.Runtime
 
         public IEnergyMgr energyMgr { get; private set; }
 
-        private ObservableCollection<IEstate> _estates;
+        internal ObservableCollection<IEstate> _estates;
 
         public Person(string name)
         {
@@ -27,6 +27,25 @@ namespace JiangH.Runtime
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
 
             energyMgr = new EnergyMgr(this);
+
+            _estates.CollectionChanged += (sender, e) =>
+             {
+                 if(e.NewItems != null)
+                 {
+                     foreach (IEstate elem in e.NewItems)
+                     {
+                         energyMgr.AddEstateOccupy(elem);
+                     }
+                 }
+
+                 if (e.OldItems != null)
+                 {
+                     foreach (IEstate elem in e.OldItems)
+                     {
+                         energyMgr.RemoveEstateOccupy(elem);
+                     }
+                 }
+             };
         }
 
         public IEnumerable<IPersonCommand> GetCommands()
@@ -64,7 +83,7 @@ namespace JiangH.Runtime
 
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
-                            estate.owner = GSession.inst.player;
+                            estate.SetManager(GSession.inst.player);
                         }
                     };
 
@@ -89,7 +108,7 @@ namespace JiangH.Runtime
 
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
-                            estate.owner = person;
+                            estate.SetManager(person);
                         }
                     };
 

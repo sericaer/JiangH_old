@@ -26,8 +26,7 @@ namespace JiangH.Runtime
 
                     for(int j=i*3; j<i*3+3; j++)
                     {
-                        GSession.inst.estates[j].owner = person;
-                        //person.AddEstate(gSession.estates[j]);
+                        GSession.inst.estates[j].SetManager(person);
                     }
                 }
 
