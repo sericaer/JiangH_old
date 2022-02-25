@@ -5,36 +5,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-class EstateInfoTab : RxMonoBehaviour
+class EstateInfoTab : RxMonoBehaviourWithData<EstateInfoTab, ReadOnlyObservableCollection<IEstate>>
 {
     public List<EstateView> estateList = new List<EstateView>();
 
-    private ReadOnlyObservableCollection<IEstate> estates;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void BindInit()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    internal void SetEstates(ReadOnlyObservableCollection<IEstate> estates)
-    {
-        if(this.estates == estates)
-        {
-            return;
-        }
-
         estateList.Clear();
 
-        this.estates = estates;
-
-        dataBind.BindObservableCollection(estates, onAddEstate, onRemoveEstate, null);
+        dataBind.BindObservableCollection(assocData, onAddEstate, onRemoveEstate, null);
     }
 
     private void onRemoveEstate(IEstate obj)
@@ -46,6 +25,7 @@ class EstateInfoTab : RxMonoBehaviour
     {
         estateList.Add(new EstateView(obj));
     }
+
 
     public class EstateView
     {

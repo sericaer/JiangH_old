@@ -10,12 +10,15 @@ namespace JiangH.API
     {
         string name { get; set; }
 
-        ISect sect { get; set; }
+        ISect sect { get;}
 
-        IPerson owner { get; set; }
+        IPerson manager { get; }
 
         ReadOnlyObservableCollection<IPerson> persons { get; }
+        ReadOnlyObservableCollection<IEstate> estates { get; }
 
         void SetMain();
+        void SetSect(ISect sect);
+        void SetManager(IPerson person);
     }
 }

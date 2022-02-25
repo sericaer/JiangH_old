@@ -12,8 +12,10 @@ namespace JiangH.API
 
         IBranch mainBranch { get; set; }
 
-        ObservableCollection<IPerson> persons { get; }
+        ReadOnlyObservableCollection<IPerson> persons { get; }
 
-        ObservableCollection<IBranch> branches { get; }
+        ReadOnlyObservableCollection<IBranch> branches { get; }
+
+        ReadOnlyObservableCollection<IEstate> estates { get; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using JiangH.Runtime.Relations;
 
 namespace JiangH.Runtime
 {
@@ -12,25 +13,7 @@ namespace JiangH.Runtime
 
         private IEstateDef def;
 
-        public IPerson owner
-        {
-            get
-            {
-                return _owner;
-            }
-            set
-            {
-                if(_owner == value)
-                {
-                    return;
-                }
-
-                var prevOwner = _owner;
-                _owner = value;
-
-                GSession.inst.relationMgr.Change(eRelation.EstateOwner, this, prevOwner, _owner);
-            }
-        }
+        public IPerson manager => _manager;
 
         public EnergyOccupyLevel level
         {
@@ -50,11 +33,10 @@ namespace JiangH.Runtime
             }
         }
 
-        private IPerson _owner;
-
         private Dictionary<string, IProduct> products = new Dictionary<string, IProduct>();
 
         private EnergyOccupyLevel _level;
+        internal Person _manager { get; set; }
 
         public Estate(string name, IEstateDef def)
         {
@@ -69,11 +51,21 @@ namespace JiangH.Runtime
         {
             if(day == 30)
             {
+                if(manager == null)
+                {
+                    return;
+                }
+
                 if(products.ContainsKey("money"))
                 {
-                    owner.money += products["money"].readlValue;
+                    manager.money += products["money"].readlValue;
                 }
             }
+        }
+
+        public void SetManager(IPerson person)
+        {
+            GSession.inst.relationMgr.Change<Relation_Estate_Person>(this, manager, person);
         }
     }
 

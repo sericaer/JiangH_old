@@ -1,4 +1,5 @@
 ﻿using JiangH.API;
+using JiangH.Runtime.Relations;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,39 +12,46 @@ namespace JiangH.Runtime
 
         public string name { get; set; }
 
-        public ISect sect { get; set; }
+        public ISect sect => _sect;
 
-        public IPerson owner { get; set; }
+        public IPerson manager => _manager;
 
         public ReadOnlyObservableCollection<IPerson> persons { get; }
 
-        public ObservableCollection<IPerson> _persons = new ObservableCollection<IPerson>();
+        public ReadOnlyObservableCollection<IEstate> estates { get; }
+
+        internal ISect _sect { get; set; }
+        internal IPerson _manager { get; set; }
+
+        internal ObservableCollection<IPerson> _persons = new ObservableCollection<IPerson>();
+        internal ObservableCollection<IEstate> _estates = new ObservableCollection<IEstate>();
+
+
         public Branch(string name, ISect sect)
         {
             this.name = name;
-            this.sect = sect;
 
             persons = new ReadOnlyObservableCollection<IPerson>(_persons);
+            estates = new ReadOnlyObservableCollection<IEstate>(_estates);
+
+            this.SetSect(sect);
+
         }
 
-        public void OnRelationAdd(eRelation relationType, IPoint peer)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnRelationChanged(eRelation relationType, IPoint prev, IPoint curr)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public void SetMain()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
-        public void OnRelationRemove(eRelation relationType, IPoint peer)
+        public void SetSect(ISect sect)
         {
-            throw new System.NotImplementedException();
+            GSession.inst.relationMgr.Change<Relation_Branch_Sect>(this, _sect, sect);
+        }
+
+        public void SetManager(IPerson person)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

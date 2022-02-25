@@ -45,17 +45,19 @@ namespace JiangH.Runtime
                 {
                     var sect = session.sects[i % session.sects.Count()];
                     var branch = sect.branches[i % sect.branches.Count()];
-                    session.persons[i].branch = branch;
+                    session.persons[i].SetBranch(branch);
 
-                    if(branch.owner == null)
+                    if(branch.manager == null)
                     {
-                        branch.owner = session.persons[i];
+                        branch.SetManager(session.persons[i]);
+
                     }
                 }
 
                 for (int i = 0; i < session.estates.Count() / 2; i++)
                 {
-                    session.estates[i].owner = session.persons[i % session.persons.Count() / 2];
+                    var person = session.persons[i % session.persons.Count() / 2];
+                    session.estates[i].SetManager(person);
                 }
 
                 session.player = GSession.inst.persons[0];

@@ -5,20 +5,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-class EnergyOccupyTab : RxMonoBehaviour
+class EnergyOccupyTab : RxMonoBehaviourWithData<EnergyOccupyTab, IEnergyMgr>
 {
 
     public Text totalEstateOccupied;
     public ListViewEnergyOccupy energyOccupyListView;
 
-    private IEnergyMgr energyMgr;
-
-    internal void SetEnergyMgr(IEnergyMgr energyMgr)
+    protected override void BindInit()
     {
-        this.energyMgr = energyMgr;
-
-        dataBind.BindText(energyMgr, x => x.totalEstateOccupied, totalEstateOccupied);
-        dataBind.BindObservableCollection(energyMgr.estateOccupys, OnAddEstateOccupy, OnRemoveEstateOccupy, null);
+        dataBind.BindText(assocData, x => x.totalEstateOccupied, totalEstateOccupied);
+        dataBind.BindObservableCollection(assocData.estateOccupys, OnAddEstateOccupy, OnRemoveEstateOccupy, null);
     }
 
     private void OnRemoveEstateOccupy(IEnergyOccupy occupy)

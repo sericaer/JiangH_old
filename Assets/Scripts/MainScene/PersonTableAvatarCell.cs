@@ -55,6 +55,6 @@ class PersonTableAvatarCell : StyleableTableCell<ButtonCellStyle>
 	{
         var instance = (GameObject)Instantiate(prefabPersonDetail, Global.dialogRoot);
 
-        instance.GetComponent<PersonDetail>().SetPerson(personView.person);
+        instance.GetComponent<PersonDetail>().assocData = personView.person;
     }
 }

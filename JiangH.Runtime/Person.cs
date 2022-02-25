@@ -1,4 +1,5 @@
 ﻿using JiangH.API;
+using JiangH.Runtime.Relations;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,22 +14,7 @@ namespace JiangH.Runtime
 
         public string name { get; set; }
 
-        public IBranch branch
-        {
-            get
-            {
-                return _branch;
-            }
-            set
-            {
-                _branch = value;
-
-                var prevBranch = _branch;
-                _branch = value;
-
-                GSession.inst.relationMgr.Change(eRelation.PersonBranch, this, prevBranch, _branch);
-            }
-        }
+        public IBranch branch => _branch;
 
         public int money { get; set; }
 
@@ -36,8 +22,8 @@ namespace JiangH.Runtime
 
         public IEnergyMgr energyMgr { get; private set; }
 
-        private ObservableCollection<IEstate> _estates;
-        private IBranch _branch;
+        internal ObservableCollection<IEstate> _estates;
+        internal IBranch _branch { get; set; }
 
         public Person(string name)
         {
@@ -47,6 +33,25 @@ namespace JiangH.Runtime
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
 
             energyMgr = new EnergyMgr(this);
+
+            _estates.CollectionChanged += (sender, e) =>
+             {
+                 if(e.NewItems != null)
+                 {
+                     foreach (IEstate elem in e.NewItems)
+                     {
+                         energyMgr.AddEstateOccupy(elem);
+                     }
+                 }
+
+                 if (e.OldItems != null)
+                 {
+                     foreach (IEstate elem in e.OldItems)
+                     {
+                         energyMgr.RemoveEstateOccupy(elem);
+                     }
+                 }
+             };
         }
 
         public IEnumerable<IPersonCommand> GetCommands()
@@ -84,7 +89,7 @@ namespace JiangH.Runtime
 
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
-                            estate.owner = GSession.inst.player;
+                            estate.SetManager(GSession.inst.player);
                         }
                     };
 
@@ -109,7 +114,7 @@ namespace JiangH.Runtime
 
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
-                            estate.owner = person;
+                            estate.SetManager(person);
                         }
                     };
 
@@ -128,6 +133,11 @@ namespace JiangH.Runtime
         public int GetEnergyOccupyValue(EnergyOccupyLevel occupyLevel, IEnergyOccupyTarget target)
         {
             return ((int)occupyLevel + 1) * 3;
+        }
+
+        public void SetBranch(IBranch branch)
+        {
+            GSession.inst.relationMgr.Change<Relation_Person_Branch>(this, _branch, branch);
         }
     }
 }

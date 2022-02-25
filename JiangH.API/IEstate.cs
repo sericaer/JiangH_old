@@ -4,7 +4,8 @@ namespace JiangH.API
 {
     public interface IEstate : IEnergyOccupyTarget, IPoint
     {
-        IPerson owner { get; set; }
+        IPerson manager { get;  }
         void OnDayInc(int year, int month, int day);
+        void SetManager(IPerson person);
     }
 }

@@ -3,6 +3,7 @@ using JiangH.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 using UnityEngine;
@@ -12,12 +13,6 @@ class PersonTableDialog : RxMonoBehaviour
     public List<PersonView> persons = new List<PersonView>();
 
     // Start is called before the first frame update
-    void Start()
-    {
-        dataBind.BindObservableCollection<IPerson>(GSession.inst.persons, OnAddPerson, OnRemovePerson, null);
-
-
-    }
 
     private void OnRemovePerson(IPerson person)
     {
@@ -46,5 +41,10 @@ class PersonTableDialog : RxMonoBehaviour
         {
             this.person = person;
         }
+    }
+
+    internal void SetPersons(ReadOnlyObservableCollection<IPerson> persons)
+    {
+        dataBind.BindObservableCollection<IPerson>(persons, OnAddPerson, OnRemovePerson, null);
     }
 }

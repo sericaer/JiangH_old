@@ -9,21 +9,31 @@ using System.Reactive.Disposables;
 using UnityEngine;
 using UnityEngine.UI;
 
-class RxMonoBehaviour : MonoBehaviour
+abstract class RxMonoBehaviourWithData<T1, T2> : RxMonoBehaviour
+{
+    public T2 assocData;
+
+    protected abstract void BindInit();
+
+    void Start()
+    {
+        BindInit();
+    }
+}
+
+abstract class RxMonoBehaviour : MonoBehaviour
 {
     protected DataBind dataBind = new DataBind();
 
-    protected Action onDestroy;
-
     void OnDestroy()
     {
-        onDestroy?.Invoke();
 
-        Debug.Log("OnDestroy RxMonoBehaviour " + this.GetHashCode().ToString("X2"));
+        Debug.Log($"OnDestroy RxMonoBehaviour {this.GetType()} {this.GetHashCode().ToString("X2")}");
 
         dataBind.Clear();
     }
 }
+
 
 class DataBind
 {

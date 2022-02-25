@@ -21,7 +21,7 @@ class Player : RxMonoBehaviour
         {
             var instance = (GameObject)Instantiate(prefabs, Global.dialogRoot);
 
-            instance.GetComponent<PersonDetail>().SetPerson(GSession.inst.player);
+            instance.GetComponent<PersonDetail>().assocData = GSession.inst.player;
         });
     }
 

@@ -29,7 +29,7 @@ class Estates : RxMonoBehaviour
         var instance = (GameObject)Instantiate(prefabs, Global.dialogRoot);
 
         var personDetail = instance.GetComponent<PersonDetail>();
-        personDetail.SetPerson(GSession.inst.player);
+        personDetail.assocData = GSession.inst.player;
 
         personDetail.GetComponentInChildren<Tabs>().SetDefaultSelectedTab("拥有产业");
     }

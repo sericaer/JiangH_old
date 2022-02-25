@@ -9,7 +9,7 @@ namespace JiangH.API
     {
         string name { get; set; }
 
-        IBranch branch { get; set; }
+        IBranch branch { get; }
         
         int money { get; set; }
 
@@ -20,5 +20,6 @@ namespace JiangH.API
         IEnumerable<IPersonCommand> GetCommands();
 
         int GetEnergyOccupyValue(EnergyOccupyLevel occupyLevel, IEnergyOccupyTarget target);
+        void SetBranch(IBranch branch);
     }
 }

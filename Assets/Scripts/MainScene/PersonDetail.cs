@@ -8,10 +8,8 @@ using UIWidgets;
 using UnityEngine;
 using UnityEngine.UI;
 
-class PersonDetail : RxMonoBehaviour
+class PersonDetail : RxMonoBehaviourWithData<PersonDetail, IPerson>
 {
-    public IPerson person;
-
     public Button btn;
 
     public PersonCommandsTab commandsTab;
@@ -23,24 +21,17 @@ class PersonDetail : RxMonoBehaviour
     public ListViewString estates;
 
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void BindInit()
     {
         btn.onClick.AddListener(() =>
         {
             var estate = new Estate(DateTime.Now.Second.ToString(), new MarketDef());
-            estate.owner = person;
+            estate.SetManager(assocData);
         });
-    }
 
-    internal void SetPerson(IPerson person)
-    {
-        this.person = person;
-
-        commandsTab.SetCommands(person.GetCommands());
-
-        enerygOccupyTab.SetEnergyMgr(person.energyMgr);
-        estateInfoTab.SetEstates(person.estates);
+        commandsTab.assocData = assocData.GetCommands();
+        enerygOccupyTab.assocData = assocData.energyMgr;
+        estateInfoTab.assocData = assocData.estates;
 
         Action<IEstate> onAddEstate = (item) =>
         {
@@ -63,14 +54,6 @@ class PersonDetail : RxMonoBehaviour
         };
 
 
-        dataBind.BindObservableCollection<IEstate>(person.estates, onAddEstate, onRemoveEstate, null);
-
-        //dataBind.BindObservableCollection<IPersonCommand>(person.commands, onAddCommand, onRemoveCommand);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        dataBind.BindObservableCollection<IEstate>(assocData.estates, onAddEstate, onRemoveEstate, null);
     }
 }

@@ -7,20 +7,16 @@ using System.Linq;
 using UIWidgets;
 using UnityEngine;
 
-class PersonCommandsTab : RxMonoBehaviour
+class PersonCommandsTab : RxMonoBehaviourWithData<PersonCommandsTab, IEnumerable<IPersonCommand>>
 {
-    public IEnumerable<IPersonCommand> commands;
-
     public ListViewPersonCommand commandListView;
 
     public Transform commandDetailBackground;
     public GameObject prefabCommandDetail;
 
-    internal void SetCommands(IEnumerable<IPersonCommand> commands)
+    protected override void BindInit()
     {
-        this.commands = commands;
-
-        foreach(var command in commands)
+        foreach (var command in assocData)
         {
             commandListView.Add(command);
         }
