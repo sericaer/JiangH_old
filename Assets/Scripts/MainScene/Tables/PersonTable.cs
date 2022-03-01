@@ -31,7 +31,10 @@ class PersonTable : RxMonoBehaviour
     {
         public string name => person.name;
         public int estateCount => person.estates.Count;
+        public int apprenticeCount => person.apprentices.Count;
         public int money => person.money;
+
+        public string master => person.master == null ? "无" : person.master.name;
 
         public readonly IPerson person;
 

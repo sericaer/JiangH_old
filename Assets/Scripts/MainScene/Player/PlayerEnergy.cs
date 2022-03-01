@@ -6,7 +6,7 @@ using UIWidgets;
 using UnityEngine;
 using UnityEngine.UI;
 
-class Energy : RxMonoBehaviour
+class PlayerEnergy : RxMonoBehaviour
 {
     public Text spend;
     public Text total;

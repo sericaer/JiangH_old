@@ -8,7 +8,7 @@ using UIWidgets;
 using UnityEngine;
 using UnityEngine.UI;
 
-class Estates : RxMonoBehaviour
+class PlayerEstates : RxMonoBehaviour
 {
     public Button button;
 

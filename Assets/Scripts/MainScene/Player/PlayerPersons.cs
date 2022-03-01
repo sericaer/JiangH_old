@@ -6,7 +6,7 @@ using UIWidgets;
 using UnityEngine;
 using UnityEngine.UI;
 
-class BranchPersons : RxMonoBehaviour
+class PlayerPersons : RxMonoBehaviour
 {
     public Text students;
     public Text total;
