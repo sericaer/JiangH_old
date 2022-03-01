@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace JiangH.Runtime
 {
-    internal class Sect : ISect
+    public class Sect : ISect
     {
 
         public event PropertyChangedEventHandler PropertyChanged;

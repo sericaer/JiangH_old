@@ -23,7 +23,7 @@ namespace JiangH.Runtime
         public IEnergyMgr energyMgr { get; private set; }
 
         internal ObservableCollection<IEstate> _estates;
-        internal IBranch _branch { get; set; }
+        internal Branch _branch { get; set; }
 
         public Person(string name)
         {
@@ -41,6 +41,7 @@ namespace JiangH.Runtime
                      foreach (IEstate elem in e.NewItems)
                      {
                          energyMgr.AddEstateOccupy(elem);
+                         _branch._estates.Add(elem);
                      }
                  }
 
@@ -49,6 +50,7 @@ namespace JiangH.Runtime
                      foreach (IEstate elem in e.OldItems)
                      {
                          energyMgr.RemoveEstateOccupy(elem);
+                         _branch._estates.Remove(elem);
                      }
                  }
              };

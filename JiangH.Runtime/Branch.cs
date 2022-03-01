@@ -20,7 +20,7 @@ namespace JiangH.Runtime
 
         public ReadOnlyObservableCollection<IEstate> estates { get; }
 
-        internal ISect _sect { get; set; }
+        internal Sect _sect { get; set; }
         internal IPerson _manager { get; set; }
 
         internal ObservableCollection<IPerson> _persons = new ObservableCollection<IPerson>();
@@ -35,6 +35,46 @@ namespace JiangH.Runtime
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
 
             this.SetSect(sect);
+
+            _persons.CollectionChanged += (sender, e) =>
+            {
+                if(e.NewItems != null)
+                {
+                    foreach (IPerson elem in e.NewItems)
+                    {
+                        _sect._persons.Add(elem);
+                    }
+                }
+
+                if(e.OldItems != null)
+                {
+                    foreach (IPerson elem in e.OldItems)
+                    {
+                        _sect._persons.Remove(elem);
+                    }
+                }
+
+            };
+
+            _estates.CollectionChanged += (sender, e) =>
+            {
+                if (e.NewItems != null)
+                {
+                    foreach (IEstate elem in e.NewItems)
+                    {
+                        _sect._estates.Add(elem);
+                    }
+                }
+
+                if(e.OldItems != null)
+                {
+                    foreach (IEstate elem in e.OldItems)
+                    {
+                        _sect._estates.Remove(elem);
+                    }
+                }
+
+            };
 
         }
 

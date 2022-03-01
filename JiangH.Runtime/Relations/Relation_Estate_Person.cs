@@ -17,42 +17,12 @@ namespace JiangH.Runtime.Relations
         {
             estate._manager = manager;
             manager._estates.Add(estate);
-
-            var branch = manager.branch as Branch;
-            if(branch == null)
-            {
-                return;
-            }
-
-            branch._estates.Add(estate);
-            var sect = branch.sect as Sect;
-            if(sect == null)
-            {
-                return;
-            }
-
-            sect._estates.Add(estate);
         }
 
         public override void OnRelationRemove(Estate estate, Person manager)
         {
             estate._manager = null ;
             manager._estates.Remove(estate);
-
-            var branch = manager.branch as Branch;
-            if (branch == null)
-            {
-                throw new Exception();
-            }
-
-            branch._estates.Remove(estate);
-            var sect = branch.sect as Sect;
-            if (sect == null)
-            {
-                throw new Exception();
-            }
-
-            sect._estates.Remove(estate);
         }
 
         public override void OnRelationChanged(Estate estate, Person manager, Person newManager)
@@ -63,21 +33,6 @@ namespace JiangH.Runtime.Relations
             estate._manager = newManager;
 
             newManager._estates.Add(estate);
-
-            var branch = newManager.branch as Branch;
-            if (branch == null)
-            {
-                throw new Exception();
-            }
-
-            branch._estates.Add(estate);
-            var sect = branch.sect as Sect;
-            if (sect == null)
-            {
-                throw new Exception();
-            }
-
-            sect._estates.Add(estate);
         }
 
     }

@@ -13,6 +13,7 @@ namespace JiangH.Runtime
 
         public int energyValue { get; private set; }
 
+        [DoNotCheckEquality]
         public EnergyOccupyLevel occupyLevel
         {
             get
@@ -38,7 +39,8 @@ namespace JiangH.Runtime
         {
             this.owner = owner;
             this.target = target;
-            this.occupyLevel = EnergyOccupyLevel.VeryLow;
+
+            occupyLevel = EnergyOccupyLevel.VeryLow;
         }
 
         public string GetLevelDesc(EnergyOccupyLevel level)
