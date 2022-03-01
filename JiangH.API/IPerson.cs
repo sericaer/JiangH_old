@@ -20,6 +20,7 @@ namespace JiangH.API
         ReadOnlyObservableCollection<IPerson> apprentices { get; }
 
         IEnergyMgr energyMgr { get; }
+        IAttitudeMgr attitudeMgr { get; }
 
         IEnumerable<IPersonCommand> GetCommands();
 

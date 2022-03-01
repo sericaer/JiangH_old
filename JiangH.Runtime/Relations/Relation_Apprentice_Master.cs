@@ -16,6 +16,9 @@ namespace JiangH.Runtime.Relations
         {
             apprentice._master = master;
             master._apprentices.Add(apprentice);
+
+            apprentice.attitudeMgr.Add(30, master, this);
+            master.attitudeMgr.Add(8, apprentice, this);
         }
 
         public override void OnRelationChanged(Person apprentice, Person master, Person newMaster)

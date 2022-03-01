@@ -52,21 +52,21 @@ namespace JiangH.Runtime
     {
         string key { get; }
 
-        Func<object, bool> isValid { get; }
+        Func<IPerson, bool> isValid { get; }
 
-        Func<object, IEnumerable<ICommandTarget>> getTargets { get; }
+        Func<IPerson, IEnumerable<ICommandTarget>> getTargets { get; }
 
-        Action<object, IEnumerable<ICommandTarget>> Do { get; }
+        Action<IPerson, IEnumerable<ICommandTarget>> Do { get; }
     }
 
     public class PersonCommandDef : IPersonCommandDef
     {
-        public Func<object, bool> isValid { get; set; }
+        public Func<IPerson, bool> isValid { get; set; }
 
         public string key { get; set; }
 
-        public Func<object, IEnumerable<ICommandTarget>> getTargets { get; set; }
+        public Func<IPerson, IEnumerable<ICommandTarget>> getTargets { get; set; }
 
-        public Action<object, IEnumerable<ICommandTarget>> Do { get; set; }
+        public Action<IPerson, IEnumerable<ICommandTarget>> Do { get; set; }
     }
 }

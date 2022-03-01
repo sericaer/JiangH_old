@@ -1,4 +1,5 @@
 ﻿using JiangH.API;
+using JiangH.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +35,21 @@ class PersonTable : RxMonoBehaviour
         public int apprenticeCount => person.apprentices.Count;
         public int money => person.money;
 
-        public string master => person.master == null ? "无" : person.master.name;
+        public string attitudeToPlayer
+        {
+            get
+            {
+                string rslt = "--";
+                var attitude = person.attitudeMgr.GetAttitudeTo(GSession.inst.player);
+                if (attitude != null)
+                {
+                    rslt = attitude.total.ToString();
+                }
+
+                return rslt;
+            }
+        }
+        public string master => person.master == null ? "--" : person.master.name;
 
         public readonly IPerson person;
 

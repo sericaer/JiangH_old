@@ -26,6 +26,8 @@ namespace JiangH.Runtime
 
         public IEnergyMgr energyMgr { get; private set; }
 
+        public IAttitudeMgr attitudeMgr { get; private set; }
+
         internal ObservableCollection<IEstate> _estates = new ObservableCollection<IEstate>();
         internal ObservableCollection<IPerson> _apprentices = new ObservableCollection<IPerson>();
         internal Sect _sect { get; set; }
@@ -40,6 +42,7 @@ namespace JiangH.Runtime
             apprentices = new ReadOnlyObservableCollection<IPerson>(_apprentices);
 
             energyMgr = new EnergyMgr(this);
+            attitudeMgr = new AttitudeMgr(this);
 
             _estates.CollectionChanged += (sender, e) =>
              {
@@ -86,16 +89,13 @@ namespace JiangH.Runtime
                 {
                     def.key = "没收产业";
 
-                    def.getTargets = (owner) =>
+                    def.getTargets = (person) =>
                     {
-                        var person = owner as IPerson;
                         return person.estates.Select(x => new CommandTarget() { param = x, key = x.name });
                     };
 
-                    def.Do = (owner, targets) =>
+                    def.Do = (person, targets) =>
                     {
-                        var person = owner as IPerson;
-
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
                             estate.SetManager(GSession.inst.player);
@@ -117,10 +117,8 @@ namespace JiangH.Runtime
                         return GSession.inst.player.estates.Select(x => new CommandTarget() { param = x, key = x.name });
                     };
 
-                    def.Do = (owner, targets) =>
+                    def.Do = (person, targets) =>
                     {
-                        var person = owner as IPerson;
-
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
                             estate.SetManager(person);
