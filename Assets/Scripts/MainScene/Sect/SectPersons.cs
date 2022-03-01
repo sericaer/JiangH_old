@@ -14,7 +14,7 @@ class SectPersons : RxMonoBehaviour
     // Use this for initialization
     void Start()
     {
-        dataBind.BindText(GSession.inst, x => x.player.branch.sect.persons.Count, cout);
+        dataBind.BindText(GSession.inst, x => x.player.sect.persons.Count, cout);
 
         button.onClick.AddListener(() =>
         {

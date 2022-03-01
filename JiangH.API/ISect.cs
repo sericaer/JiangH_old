@@ -10,12 +10,12 @@ namespace JiangH.API
     {
         string name { get; set; }
 
-        IBranch mainBranch { get; set; }
+        IPerson manager { get; }
 
         ReadOnlyObservableCollection<IPerson> persons { get; }
 
-        ReadOnlyObservableCollection<IBranch> branches { get; }
-
         ReadOnlyObservableCollection<IEstate> estates { get; }
+
+        void SetManager(IPerson person);
     }
 }

@@ -6,31 +6,26 @@ using System.Text;
 
 namespace JiangH.Runtime.Relations
 {
-    class Relation_Branch_Sect : AbsRelation<Branch, Sect>
+    class Relation_Person_Sect : AbsRelation<Person, Sect>
     {
-        public Relation_Branch_Sect(Branch branch, Sect sect) : base(branch, sect)
+        public Relation_Person_Sect(Person person, Sect sect) : base(person, sect)
         {
 
         }
 
-        public override void OnRelationAdd(Branch branch, Sect sect)
+        public override void OnRelationAdd(Person person, Sect sect)
         {
-            if(branch.estates.Any() || branch.persons.Any())
-            {
-                throw new Exception();
-            }
+            person._sect = sect;
 
-            branch._sect = sect;
-
-            sect._branches.Add(branch);
+            sect._persons.Add(person);
         }
 
-        public override void OnRelationChanged(Branch branch, Sect sect, Sect newSect)
+        public override void OnRelationChanged(Person branch, Sect sect, Sect newSect)
         {
             throw new Exception();
         }
 
-        public override void OnRelationRemove(Branch branch, Sect sect)
+        public override void OnRelationRemove(Person branch, Sect sect)
         {
             throw new Exception();
         }

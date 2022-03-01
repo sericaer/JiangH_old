@@ -19,16 +19,6 @@ namespace JiangH.Runtime
                 {
                     var sect = new Sect($"Sect{i}");
                     session.sects.Add(sect);
-
-                    for (var j = 0; j < 2; j++)
-                    {
-                        var branch = new Branch($"{sect.name}.Branch{j}", sect);
-
-                        if (j == 0)
-                        {
-                            branch.SetMain();
-                        }
-                    }
                 }
 
                 for (int i = 0; i < 100; i++)
@@ -44,13 +34,11 @@ namespace JiangH.Runtime
                 for(int i=0; i< session.persons.Count() / 2; i++)
                 {
                     var sect = session.sects[i % session.sects.Count()];
-                    var branch = sect.branches[i % sect.branches.Count()];
-                    session.persons[i].SetBranch(branch);
+                    session.persons[i].SetSect(sect);
 
-                    if(branch.manager == null)
+                    if(sect.manager == null)
                     {
-                        branch.SetManager(session.persons[i]);
-
+                        sect.SetManager(session.persons[i]);
                     }
                 }
 

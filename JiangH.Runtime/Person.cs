@@ -14,7 +14,7 @@ namespace JiangH.Runtime
 
         public string name { get; set; }
 
-        public IBranch branch => _branch;
+        public ISect sect => _sect;
 
         public int money { get; set; }
 
@@ -23,7 +23,7 @@ namespace JiangH.Runtime
         public IEnergyMgr energyMgr { get; private set; }
 
         internal ObservableCollection<IEstate> _estates;
-        internal Branch _branch { get; set; }
+        internal Sect _sect { get; set; }
 
         public Person(string name)
         {
@@ -41,7 +41,7 @@ namespace JiangH.Runtime
                      foreach (IEstate elem in e.NewItems)
                      {
                          energyMgr.AddEstateOccupy(elem);
-                         _branch._estates.Add(elem);
+                         _sect._estates.Add(elem);
                      }
                  }
 
@@ -50,7 +50,7 @@ namespace JiangH.Runtime
                      foreach (IEstate elem in e.OldItems)
                      {
                          energyMgr.RemoveEstateOccupy(elem);
-                         _branch._estates.Remove(elem);
+                         _sect._estates.Remove(elem);
                      }
                  }
              };
@@ -137,9 +137,9 @@ namespace JiangH.Runtime
             return ((int)occupyLevel + 1) * 3;
         }
 
-        public void SetBranch(IBranch branch)
+        public void SetSect(ISect sect)
         {
-            GSession.inst.relationMgr.Change<Relation_Person_Branch>(this, _branch, branch);
+            GSession.inst.relationMgr.Change<Relation_Person_Sect>(this, _sect, sect);
         }
     }
 }

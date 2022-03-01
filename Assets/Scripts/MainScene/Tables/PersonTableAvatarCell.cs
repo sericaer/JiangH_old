@@ -10,7 +10,7 @@ using UnityUITable;
 class PersonTableAvatarCell : StyleableTableCell<ButtonCellStyle>
 {
 
-	public PersonTableDialog.PersonView personView => obj as PersonTableDialog.PersonView;
+	public PersonTable.PersonView personView => obj as PersonTable.PersonView;
 
 	public Button button;
 	public Text label;

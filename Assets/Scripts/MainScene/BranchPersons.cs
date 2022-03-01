@@ -19,7 +19,7 @@ class BranchPersons : RxMonoBehaviour
     void Start()
     {
         //dataBind.BindText(GSession.inst, x => x.player.energyMgr.totalEstateOccupied, spend);
-        dataBind.BindText(GSession.inst, x => x.player.branch.persons.Count, total);
+        dataBind.BindText(GSession.inst, x => x.player.sect.persons.Count, total);
 
         button.onClick.AddListener(ShowPersnTable);
     }
@@ -29,7 +29,7 @@ class BranchPersons : RxMonoBehaviour
         var instance = (GameObject)Instantiate(prefabs, Global.dialogRoot);
 
         var personTable = instance.GetComponent<PersonTableDialog>();
-        personTable.SetPersons(GSession.inst.player.branch.persons);
+        personTable.SetPersons(GSession.inst.player.sect.persons);
     }
 
     // Update is called once per frame

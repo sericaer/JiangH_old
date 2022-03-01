@@ -13,11 +13,12 @@ class Sect : RxMonoBehaviour
     // Use this for initialization
     void Start()
     {
-        dataBind.BindText(GSession.inst, x => x.player.branch.sect.name, sectName);
+        dataBind.BindText(GSession.inst, x => x.player.sect.name, sectName);
 
         button.onClick.AddListener(() =>
         {
             var instance = (GameObject)Instantiate(prefabs, Global.dialogRoot);
+            instance.GetComponent<SectDetail>().sect = GSession.inst.player.sect;
         });
     }
 
