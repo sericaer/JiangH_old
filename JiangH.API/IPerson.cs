@@ -11,9 +11,13 @@ namespace JiangH.API
 
         ISect sect { get; }
         
+        IPerson master { get; }
+
         int money { get; set; }
 
         ReadOnlyObservableCollection<IEstate> estates { get;}
+
+        ReadOnlyObservableCollection<IPerson> apprentices { get; }
 
         IEnergyMgr energyMgr { get; }
 
@@ -21,5 +25,6 @@ namespace JiangH.API
 
         int GetEnergyOccupyValue(EnergyOccupyLevel occupyLevel, IEnergyOccupyTarget target);
         void SetSect(ISect sect);
+        void SetMaster(IPerson person);
     }
 }

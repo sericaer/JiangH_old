@@ -1,5 +1,7 @@
-﻿using System;
+﻿using JiangH.API;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JiangH.Runtime
@@ -31,26 +33,51 @@ namespace JiangH.Runtime
                     session.persons.Add(new Person($"Person{i}"));
                 }
 
-                for(int i=0; i< session.persons.Count() / 2; i++)
-                {
-                    var sect = session.sects[i % session.sects.Count()];
-                    session.persons[i].SetSect(sect);
+                Queue<IPerson> persons = new Queue<IPerson>(session.persons);
+                Queue<IEstate> estates = new Queue<IEstate>(session.estates);
 
-                    if(sect.manager == null)
+                foreach (var sect in session.sects)
+                {
+                    foreach(var person in persons.DequeueRange(3))
                     {
-                        sect.SetManager(session.persons[i]);
+                        person.SetSect(sect);
+
+                        if (sect.manager == null)
+                        {
+                            sect.SetManager(person);
+                        }
                     }
                 }
 
-                for (int i = 0; i < session.estates.Count() / 2; i++)
+                foreach(var person in session.sects.SelectMany(x=>x.persons).ToArray())
                 {
-                    var person = session.persons[i % session.persons.Count() / 2];
-                    session.estates[i].SetManager(person);
+                    foreach (var estate in estates.DequeueRange(3))
+                    {
+                        estate.SetManager(person);
+                    }
+
+                    foreach(var apprentice in persons.DequeueRange(3))
+                    {
+                        apprentice.SetMaster(person);
+                    }
                 }
 
-                session.player = GSession.inst.persons[0];
-                return session;
+                return GSession.inst;
             }
+        }
+    }
+
+    public static class Extentions
+    {
+        public static IEnumerable<T> DequeueRange<T>(this Queue<T> self, int count)
+        {
+            var list = new List<T>();
+            for(int i=0; i<Math.Min(count, self.Count); i++)
+            {
+                list.Add(self.Dequeue());
+            }
+
+            return list;
         }
     }
 }

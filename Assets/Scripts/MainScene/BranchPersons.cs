@@ -18,7 +18,7 @@ class BranchPersons : RxMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //dataBind.BindText(GSession.inst, x => x.player.energyMgr.totalEstateOccupied, spend);
+        dataBind.BindText(GSession.inst, x => x.player.apprentices.Count, students);
         dataBind.BindText(GSession.inst, x => x.player.sect.persons.Count, total);
 
         button.onClick.AddListener(ShowPersnTable);

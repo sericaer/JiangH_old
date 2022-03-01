@@ -16,21 +16,28 @@ namespace JiangH.Runtime
 
         public ISect sect => _sect;
 
+        public IPerson master => _master;
+
         public int money { get; set; }
 
         public ReadOnlyObservableCollection<IEstate> estates { get; private set; }
 
+        public ReadOnlyObservableCollection<IPerson> apprentices { get; private set; }
+
         public IEnergyMgr energyMgr { get; private set; }
 
-        internal ObservableCollection<IEstate> _estates;
+        internal ObservableCollection<IEstate> _estates = new ObservableCollection<IEstate>();
+        internal ObservableCollection<IPerson> _apprentices = new ObservableCollection<IPerson>();
         internal Sect _sect { get; set; }
+        internal IPerson _master { get; set; }
+
 
         public Person(string name)
         {
             this.name = name;
 
-            _estates = new ObservableCollection<IEstate>();
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
+            apprentices = new ReadOnlyObservableCollection<IPerson>(_apprentices);
 
             energyMgr = new EnergyMgr(this);
 
@@ -140,6 +147,17 @@ namespace JiangH.Runtime
         public void SetSect(ISect sect)
         {
             GSession.inst.relationMgr.Change<Relation_Person_Sect>(this, _sect, sect);
+        }
+
+        public void SetMaster(IPerson person)
+        {
+            if (person.sect == null || this.sect != null)
+            {
+                throw new Exception();
+            }
+
+            GSession.inst.relationMgr.Change<Relation_Person_Sect>(this, _sect, person.sect);
+            GSession.inst.relationMgr.Change<Relation_Person_Person>(this, _master, person);
         }
     }
 }
