@@ -65,7 +65,7 @@ namespace JiangH.Runtime
 
         public void SetManager(IPerson person)
         {
-            GSession.inst.relationMgr.Change<Relation_Estate_Person>(this, manager, person);
+            GSession.inst.relationMgr.Change<Relation_Estate_Manager>(this, manager, person);
         }
     }
 

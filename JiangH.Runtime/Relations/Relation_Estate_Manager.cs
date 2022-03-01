@@ -6,9 +6,9 @@ using System.Text;
 
 namespace JiangH.Runtime.Relations
 {
-    public class Relation_Estate_Person : AbsRelation<Estate, Person>
+    public class Relation_Estate_Manager : AbsRelation<Estate, Person>
     {
-        public Relation_Estate_Person(Estate p1, Person p2) : base(p1, p2)
+        public Relation_Estate_Manager(Estate p1, Person p2) : base(p1, p2)
         {
 
         }

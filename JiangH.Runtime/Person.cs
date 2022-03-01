@@ -157,7 +157,7 @@ namespace JiangH.Runtime
             }
 
             GSession.inst.relationMgr.Change<Relation_Person_Sect>(this, _sect, person.sect);
-            GSession.inst.relationMgr.Change<Relation_Person_Person>(this, _master, person);
+            GSession.inst.relationMgr.Change<Relation_Apprentice_Master>(this, _master, person);
         }
     }
 }
