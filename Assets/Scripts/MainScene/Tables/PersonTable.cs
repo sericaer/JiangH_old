@@ -49,6 +49,22 @@ class PersonTable : RxMonoBehaviour
                 return rslt;
             }
         }
+
+        public string attitudeFromPlayer
+        {
+            get
+            {
+                string rslt = "--";
+                var attitude = GSession.inst.player.attitudeMgr.GetAttitudeTo(person);
+                if (attitude != null)
+                {
+                    rslt = attitude.total.ToString();
+                }
+
+                return rslt;
+            }
+        }
+
         public string master => person.master == null ? "--" : person.master.name;
 
         public readonly IPerson person;

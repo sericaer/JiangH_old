@@ -18,11 +18,15 @@ namespace JiangH.Runtime
 
         public IPerson master => _master;
 
+        public IPerson manager => _manager;
+
         public int money { get; set; }
 
         public ReadOnlyObservableCollection<IEstate> estates { get; private set; }
 
         public ReadOnlyObservableCollection<IPerson> apprentices { get; private set; }
+
+        public ReadOnlyObservableCollection<IPerson> subordinates { get; private set; }
 
         public IEnergyMgr energyMgr { get; private set; }
 
@@ -30,9 +34,11 @@ namespace JiangH.Runtime
 
         internal ObservableCollection<IEstate> _estates = new ObservableCollection<IEstate>();
         internal ObservableCollection<IPerson> _apprentices = new ObservableCollection<IPerson>();
+        internal ObservableCollection<IPerson> _subordinates = new ObservableCollection<IPerson>();
+
         internal Sect _sect { get; set; }
         internal IPerson _master { get; set; }
-
+        internal Person _manager { get; set; }
 
         public Person(string name)
         {
@@ -40,6 +46,7 @@ namespace JiangH.Runtime
 
             estates = new ReadOnlyObservableCollection<IEstate>(_estates);
             apprentices = new ReadOnlyObservableCollection<IPerson>(_apprentices);
+            subordinates = new ReadOnlyObservableCollection<IPerson>(_subordinates);
 
             energyMgr = new EnergyMgr(this);
             attitudeMgr = new AttitudeMgr(this);
@@ -99,6 +106,8 @@ namespace JiangH.Runtime
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
                             estate.SetManager(GSession.inst.player);
+
+                            person.attitudeMgr.Add(-20, GSession.inst.player, def.key + estate.name);
                         }
                     };
 
@@ -122,6 +131,8 @@ namespace JiangH.Runtime
                         foreach (var estate in targets.Select(x => x.param as IEstate))
                         {
                             estate.SetManager(person);
+
+                            person.attitudeMgr.Add(15, GSession.inst.player, def.key + estate.name);
                         }
                     };
 

@@ -18,6 +18,16 @@ namespace JiangH.Runtime.Relations
             person._sect = sect;
 
             sect._persons.Add(person);
+
+            if (sect.manager != null)
+            {
+                if (person.manager != null)
+                {
+                    throw new Exception();
+                }    
+
+                GSession.inst.relationMgr.Change<Relation_SectMember_Manager>(person, person.manager, sect.manager);
+            }
         }
 
         public override void OnRelationChanged(Person branch, Sect sect, Sect newSect)

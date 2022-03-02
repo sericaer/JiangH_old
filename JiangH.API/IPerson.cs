@@ -13,11 +13,15 @@ namespace JiangH.API
         
         IPerson master { get; }
 
+        IPerson manager { get; }
+
         int money { get; set; }
 
         ReadOnlyObservableCollection<IEstate> estates { get;}
 
         ReadOnlyObservableCollection<IPerson> apprentices { get; }
+
+        ReadOnlyObservableCollection<IPerson> subordinates { get; }
 
         IEnergyMgr energyMgr { get; }
         IAttitudeMgr attitudeMgr { get; }
