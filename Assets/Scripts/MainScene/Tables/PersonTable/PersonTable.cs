@@ -30,7 +30,9 @@ class PersonTable : RxMonoBehaviour
 
     public class PersonView
     {
-        public string name => person.name;
+
+        public readonly IPerson person;
+
         public int estateCount => person.estates.Count;
         public int apprenticeCount => person.apprentices.Count;
         public int money => person.money;
@@ -67,7 +69,6 @@ class PersonTable : RxMonoBehaviour
 
         public string master => person.master == null ? "--" : person.master.name;
 
-        public readonly IPerson person;
 
         public PersonView(IPerson person)
         {

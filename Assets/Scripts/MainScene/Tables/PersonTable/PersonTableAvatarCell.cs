@@ -19,14 +19,24 @@ class PersonTableAvatarCell : StyleableTableCell<ButtonCellStyle>
 
 	bool subscribed = false;
 
+	private IPerson person;
+
 	public override int GetPriority(MemberInfo member)
 	{
 		return 10;
 	}
 
-	public override bool IsCompatibleWithMember(MemberInfo member)
+	public override bool IsCompatibleWithMember(MemberInfo memberInfo)
 	{
-		return (member.MemberType == MemberTypes.Field || member.MemberType == MemberTypes.Property || typeof(PersonTableDialog.PersonView).IsAssignableFrom(table.ElementType));
+		switch(memberInfo)
+        {
+			case FieldInfo field:
+				return typeof(IPerson).IsAssignableFrom(field.FieldType);
+			case PropertyInfo property:
+				return typeof(IPerson).IsAssignableFrom(property.PropertyType);
+			default:
+				return false;
+        }
 	}
 
 	void Update()
@@ -41,20 +51,25 @@ class PersonTableAvatarCell : StyleableTableCell<ButtonCellStyle>
 	public override void UpdateContent() 
 	{
         if (property == null || property.IsEmpty)
-            return;
+        {
+			return;
+		}
+            
         object o = property.GetValue(obj);
         if (o == null)
-            label.text = "null";
-        else if (Table.IsCollection(o.GetType()))
-            label.text = string.Join(", ", (o as IEnumerable).OfType<object>().Select(obj => obj.ToString()).ToArray());
-        else
-            label.text = o.ToString();
-    }
+        {
+			label.text = "null";
+			return;
+		}
+
+		person = o as IPerson;
+		label.text = person.name;
+	}
 
 	protected virtual void OnButtonClicked()
 	{
         var instance = (GameObject)Instantiate(prefabPersonDetail, Global.dialogRoot);
 
-        instance.GetComponent<PersonDetail>().assocData = personView.person;
+        instance.GetComponent<PersonDetail>().assocData = person;
     }
 }
