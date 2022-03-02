@@ -9,9 +9,6 @@ using UnityUITable;
 
 class PersonTableAvatarCell : StyleableTableCell<ButtonCellStyle>
 {
-
-	public PersonTable.PersonView personView => obj as PersonTable.PersonView;
-
 	public Button button;
 	public Text label;
 

@@ -7,6 +7,8 @@ namespace JiangH.Runtime
 {
     class AttitudeMgr : IAttitudeMgr
     {
+        public IEnumerable<IAttitude> all => dict.Values;
+
         private Dictionary<IPerson, Attitude> dict = new Dictionary<IPerson, Attitude>();
         private Person owner;
 
@@ -44,6 +46,8 @@ namespace JiangH.Runtime
         public int total { get; private set; }
 
         public IPerson peer { get; private set; }
+
+        public IEnumerable<(object label, int value)> elements => list;
 
         private List<(object label, int value)> list = new List<(object label, int value)>();
 
